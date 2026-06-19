@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Pruebas - RoomOps Frontend</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: #1a1a2e;
+      background: #ffffff;
+      padding: 40px 50px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 18pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      border-bottom: 3px solid #4f46e5;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 28px 0 10px;
+      border-left: 4px solid #4f46e5;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #2d2d6e;
+      margin: 18px 0 6px;
+    }
+
+    p { margin-bottom: 8px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 10pt;
+    }
+
+    thead tr {
+      background-color: #4f46e5;
+      color: #ffffff;
+    }
+
+    thead th {
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) { background-color: #f5f5ff; }
+    tbody tr:nth-child(odd)  { background-color: #ffffff; }
+
+    tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 9pt;
+      font-weight: 600;
+    }
+
+    .badge-alta    { background: #fee2e2; color: #991b1b; }
+    .badge-media   { background: #fef3c7; color: #92400e; }
+    .badge-baja    { background: #dcfce7; color: #166534; }
+    .badge-ok      { background: #dcfce7; color: #166534; }
+    .badge-fail    { background: #fee2e2; color: #991b1b; }
+    .badge-pending { background: #e0e7ff; color: #3730a3; }
+
+    .section-intro {
+      background: #f0f0ff;
+      border-left: 4px solid #4f46e5;
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      font-size: 10pt;
+    }
+
+    .matrix-table thead tr { background-color: #1a1a2e; }
+
+    ul { padding-left: 20px; margin-bottom: 8px; }
+    li { margin-bottom: 3px; }
+
+    .page-break { page-break-before: always; }
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      font-size: 9pt;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Plan de Pruebas — RoomOps Frontend</h1>
+  <p class="doc-meta">
+    Proyecto: RoomOps &nbsp;|&nbsp; Módulo: Frontend (React + Vite) &nbsp;|&nbsp;
+    Versión: 1.0 &nbsp;|&nbsp; Fecha: mayo 2026 &nbsp;|&nbsp; Tipo: Pruebas Funcionales Manuales
+  </p>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>1. Objetivos del Plan</h2>
+  <p>
+    El presente plan de pruebas tiene como finalidad verificar que las funcionalidades implementadas en el
+    frontend de RoomOps se comporten correctamente según los requerimientos definidos, cubriendo los flujos de
+    autenticación, control de acceso basado en roles (RBAC), gestión de tareas, checklist, apartamentos,
+    usuarios y el tablero Kanban.
+  </p>
+  <p>Las pruebas son de carácter <strong>funcional manual</strong>, ejecutadas sobre el entorno desplegado en
+  AWS EC2 (frontend), con backend en una segunda instancia AWS EC2 y base de datos en Amazon RDS PostgreSQL.</p>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>2. Alcance de las Pruebas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Módulo</th>
+        <th>Incluido</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Autenticación (Login / Logout)</td><td><span class="badge badge-ok">Sí</span></td><td>JWT, sesión, expiración de token</td></tr>
+      <tr><td>Control de acceso por rol (RBAC)</td><td><span class="badge badge-ok">Sí</span></td><td>Roles: ADMINISTRADOR, SUPERVISOR, TRABAJADOR</td></tr>
+      <tr><td>Gestión de usuarios</td><td><span class="badge badge-ok">Sí</span></td><td>CRUD y cambio de estado activo/inactivo</td></tr>
+      <tr><td>Gestión de apartamentos</td><td><span class="badge badge-ok">Sí</span></td><td>CRUD y cambio de estado</td></tr>
+      <tr><td>Gestión de tareas</td><td><span class="badge badge-ok">Sí</span></td><td>Creación, edición, eliminación, filtros y asignación</td></tr>
+      <tr><td>Checklist de tareas</td><td><span class="badge badge-ok">Sí</span></td><td>Guardado desde panel de detalle, fallback local</td></tr>
+      <tr><td>Tablero Kanban</td><td><span class="badge badge-ok">Sí</span></td><td>Drag-and-drop entre columnas de estado</td></tr>
+      <tr><td>Dashboard / Panel de supervisión</td><td><span class="badge badge-ok">Sí</span></td><td>Métricas por estado y período</td></tr>
+      <tr><td>Integración con API REST</td><td><span class="badge badge-ok">Sí</span></td><td>Axios con token Bearer y manejo de errores 401</td></tr>
+      <tr><td>Responsividad</td><td><span class="badge badge-ok">Sí</span></td><td>Vista desktop y móvil</td></tr>
+      <tr><td>Pruebas unitarias automatizadas</td><td><span class="badge badge-fail">No</span></td><td>Fuera del alcance del proyecto</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>3. Matriz de Permisos Esperada por Rol</h2>
+  <div class="section-intro">
+    Define el comportamiento esperado para cada rol antes de ejecutar los casos de prueba.
+  </div>
+
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th>Funcionalidad</th>
+        <th>ADMINISTRADOR</th>
+        <th>SUPERVISOR</th>
+        <th>TRABAJADOR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Ver dashboard general</td><td>✓</td><td>✓</td><td>✗ (ve dashboard personal)</td></tr>
+      <tr><td>Gestionar usuarios</td><td>✓ (CRUD completo)</td><td>✗</td><td>✗</td></tr>
+      <tr><td>Ver lista de usuarios</td><td>✓</td><td>✓ (solo lectura)</td><td>✗</td></tr>
+      <tr><td>Gestionar apartamentos</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      <tr><td>Ver apartamentos</td><td>✓</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Crear y asignar tareas</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      <tr><td>Ver todas las tareas</td><td>✓</td><td>✓</td><td>✗ (solo propias)</td></tr>
+      <tr><td>Editar tareas</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      <tr><td>Eliminar tareas</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      <tr><td>Ver y editar checklist</td><td>✓</td><td>✓</td><td>✓</td></tr>
+      <tr><td>Kanban global</td><td>✓</td><td>✓</td><td>✗</td></tr>
+      <tr><td>Kanban personal</td><td>✓</td><td>✓</td><td>✓ (solo propias)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>4. Casos de Prueba</h2>
+
+  <!-- ── Módulo Auth ── -->
+  <h3>4.1 Módulo: Autenticación</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-AUTH-01</td>
+        <td>Login con credenciales válidas</td>
+        <td>Usuario activo registrado en el sistema</td>
+        <td>1. Ir a /login<br>2. Ingresar email y contraseña válidos<br>3. Hacer clic en "Ingresar"</td>
+        <td>Redirige a /home. Sesión activa con token JWT almacenado. Menú lateral visible según rol.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-AUTH-02</td>
+        <td>Login con credenciales inválidas</td>
+        <td>—</td>
+        <td>1. Ir a /login<br>2. Ingresar credenciales incorrectas<br>3. Hacer clic en "Ingresar"</td>
+        <td>Se muestra mensaje de error "Credenciales inválidas". No se redirige.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-AUTH-03</td>
+        <td>Sesión expirada redirige al login</td>
+        <td>Token expirado en localStorage</td>
+        <td>1. Insertar token vencido manualmente en localStorage<br>2. Refrescar la página</td>
+        <td>El sistema detecta expiración, limpia la sesión y redirige a /login.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-AUTH-04</td>
+        <td>Acceso a ruta protegida sin sesión</td>
+        <td>Sin token en localStorage</td>
+        <td>1. Ingresar directamente a /tasks o /users en el navegador</td>
+        <td>Redirige a /login sin mostrar contenido.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-AUTH-05</td>
+        <td>Usuario logueado no puede acceder a /login</td>
+        <td>Sesión activa</td>
+        <td>1. Con sesión activa, intentar ir a /login</td>
+        <td>Redirige automáticamente a /home.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-AUTH-06</td>
+        <td>Cierre de sesión</td>
+        <td>Sesión activa</td>
+        <td>1. Hacer clic en "Cerrar sesión" en el sidebar<br>2. Verificar estado</td>
+        <td>Token y datos de sesión eliminados. Redirige a /login.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo RBAC ── -->
+  <h3>4.2 Módulo: Control de Acceso por Rol (RBAC)</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-RBAC-01</td>
+        <td>TRABAJADOR no puede acceder a /users</td>
+        <td>Sesión activa con rol TRABAJADOR</td>
+        <td>1. Intentar navegar a /users directamente</td>
+        <td>Redirige a /home. No se muestra la vista de usuarios.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-RBAC-02</td>
+        <td>TRABAJADOR solo ve sus propias tareas</td>
+        <td>Existen tareas asignadas a distintos usuarios</td>
+        <td>1. Login como TRABAJADOR<br>2. Ir a /tasks</td>
+        <td>Solo se listan las tareas asignadas al usuario actual.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-RBAC-03</td>
+        <td>SUPERVISOR no puede eliminar usuarios</td>
+        <td>Sesión activa con rol SUPERVISOR</td>
+        <td>1. Ir a /users<br>2. Verificar controles disponibles</td>
+        <td>No aparece opción de crear ni eliminar usuarios. Solo visualización.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-RBAC-04</td>
+        <td>ADMINISTRADOR accede a todas las vistas</td>
+        <td>Sesión activa con rol ADMINISTRADOR</td>
+        <td>1. Navegar por /users, /apartments, /tasks, /kanban, /home</td>
+        <td>Todas las vistas cargan correctamente con controles completos (CRUD).</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-RBAC-05</td>
+        <td>TRABAJADOR ve dashboard personal, no administrativo</td>
+        <td>Sesión activa con rol TRABAJADOR</td>
+        <td>1. Login como TRABAJADOR<br>2. Ir a /home</td>
+        <td>Se muestra el dashboard personal con tareas propias. No se muestran métricas globales.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Usuarios ── -->
+  <h3>4.3 Módulo: Gestión de Usuarios</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-USR-01</td>
+        <td>Crear usuario nuevo</td>
+        <td>Sesión con rol ADMINISTRADOR</td>
+        <td>1. Ir a /users<br>2. Hacer clic en "Crear usuario"<br>3. Completar RUN, nombre, apellido, correo, contraseña y rol<br>4. Confirmar</td>
+        <td>Usuario creado y visible en la tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-USR-02</td>
+        <td>Crear usuario con datos incompletos</td>
+        <td>Sesión con rol ADMINISTRADOR</td>
+        <td>1. Abrir modal de creación<br>2. Dejar campos obligatorios vacíos<br>3. Confirmar</td>
+        <td>Se muestra validación "Completa nombre, apellido, correo, password y rol". No se crea el usuario.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-USR-03</td>
+        <td>Editar usuario existente</td>
+        <td>Sesión con rol ADMINISTRADOR, usuario existente</td>
+        <td>1. Ir a /users<br>2. Hacer clic en editar sobre un usuario<br>3. Modificar nombre y guardar</td>
+        <td>Datos actualizados en tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-USR-04</td>
+        <td>Desactivar usuario</td>
+        <td>Sesión con rol ADMINISTRADOR, usuario activo</td>
+        <td>1. Ir a /users<br>2. Hacer clic en el control de estado de un usuario activo<br>3. Confirmar acción</td>
+        <td>El usuario aparece como "Inactivo" en la tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-USR-05</td>
+        <td>Filtrar usuarios por rol</td>
+        <td>Existen usuarios con distintos roles</td>
+        <td>1. Ir a /users<br>2. Aplicar filtro por rol "TRABAJADOR"</td>
+        <td>Solo se muestran usuarios con rol TRABAJADOR.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Apartamentos ── -->
+  <h3>4.4 Módulo: Gestión de Apartamentos</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-APT-01</td>
+        <td>Crear apartamento</td>
+        <td>Sesión con rol ADMINISTRADOR o SUPERVISOR</td>
+        <td>1. Ir a /apartments<br>2. Crear apartamento con nombre y piso válidos</td>
+        <td>Apartamento creado y visible en tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-APT-02</td>
+        <td>Crear apartamento sin nombre</td>
+        <td>Sesión con rol ADMINISTRADOR</td>
+        <td>1. Abrir modal de creación<br>2. Dejar nombre vacío y confirmar</td>
+        <td>Validación "El nombre es obligatorio". No se crea el registro.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-APT-03</td>
+        <td>Editar apartamento</td>
+        <td>Apartamento existente</td>
+        <td>1. Ir a /apartments<br>2. Editar nombre o piso de un apartamento<br>3. Guardar</td>
+        <td>Datos actualizados. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-APT-04</td>
+        <td>Cambiar estado de apartamento</td>
+        <td>Apartamento activo existente</td>
+        <td>1. Cambiar estado a "Inactivo" y confirmar</td>
+        <td>Badge cambia a "Inactivo". Notificación de éxito.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-APT-05</td>
+        <td>Filtrar por piso</td>
+        <td>Apartamentos en distintos pisos</td>
+        <td>1. Aplicar filtro por piso específico</td>
+        <td>Solo se muestran apartamentos del piso seleccionado.</td>
+        <td><span class="badge badge-baja">Baja</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Tareas ── -->
+  <h3>4.5 Módulo: Gestión de Tareas</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-TASK-01</td>
+        <td>Crear tarea y asignar a usuario</td>
+        <td>Sesión ADMINISTRADOR o SUPERVISOR. Existe al menos un apartamento y un usuario.</td>
+        <td>1. Ir a /tasks<br>2. Crear tarea con título, tipo, fecha, apartamento, estado y usuario asignado</td>
+        <td>Tarea creada y visible en la tabla con todos los datos correctos.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-02</td>
+        <td>Editar tarea existente</td>
+        <td>Tarea existente, sesión con permisos de edición</td>
+        <td>1. Ir a /tasks<br>2. Editar título y estado de una tarea<br>3. Guardar</td>
+        <td>Cambios reflejados en la tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-03</td>
+        <td>Eliminar tarea</td>
+        <td>Tarea existente, sesión ADMINISTRADOR o SUPERVISOR</td>
+        <td>1. Ir a /tasks<br>2. Eliminar una tarea y confirmar el diálogo</td>
+        <td>Tarea eliminada. No aparece en la tabla. Notificación de éxito.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-04</td>
+        <td>Filtrar tareas por apartamento</td>
+        <td>Tareas asignadas a distintos apartamentos</td>
+        <td>1. Seleccionar un apartamento en el filtro</td>
+        <td>Solo se listan las tareas del apartamento seleccionado.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-05</td>
+        <td>Filtrar tareas por persona asignada</td>
+        <td>Tareas asignadas a distintos usuarios</td>
+        <td>1. Seleccionar un usuario en el filtro de asignado</td>
+        <td>Solo se muestran tareas del usuario seleccionado.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-06</td>
+        <td>Filtrar tareas por tipo</td>
+        <td>Tareas de distintos tipos (Aseo, Mantención, Repaso)</td>
+        <td>1. Seleccionar tipo "Aseo" en el filtro</td>
+        <td>Solo se muestran tareas de tipo Aseo.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-07</td>
+        <td>Búsqueda libre de tareas</td>
+        <td>Tareas existentes</td>
+        <td>1. Escribir texto en el buscador</td>
+        <td>Resultados filtrados en tiempo real, sin distinción de mayúsculas ni acentos.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-TASK-08</td>
+        <td>Fallback local si el backend falla</td>
+        <td>Backend no disponible</td>
+        <td>1. Simular fallo de red<br>2. Intentar cargar tareas</td>
+        <td>Se cargan tareas desde localStorage local. Notificación de advertencia visible.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Checklist ── -->
+  <h3>4.6 Módulo: Checklist de Tareas</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-CHK-01</td>
+        <td>Ver checklist desde panel de detalle</td>
+        <td>Tarea con checklist creado</td>
+        <td>1. Ir a /tasks o /home<br>2. Hacer clic en el ícono de detalle de una tarea</td>
+        <td>Panel lateral abre con los ítems del checklist visibles.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-CHK-02</td>
+        <td>Marcar ítem como COMPLETADO y guardar</td>
+        <td>Panel de detalle abierto, sesión activa</td>
+        <td>1. Marcar un ítem como "Completado"<br>2. Hacer clic en "Guardar"</td>
+        <td>Cambio persiste al reabrir el panel. Estado de la tarea se actualiza coherentemente.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-CHK-03</td>
+        <td>Marcar ítem como BLOQUEADO sin nota</td>
+        <td>Panel de detalle abierto</td>
+        <td>1. Marcar un ítem como "Bloqueado"<br>2. Dejar el campo nota vacío<br>3. Intentar guardar</td>
+        <td>Se muestra error de validación: la nota es obligatoria cuando el ítem está bloqueado.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-CHK-04</td>
+        <td>Guardar checklist desde dashboard trabajador</td>
+        <td>Sesión con rol TRABAJADOR, tarea propia con checklist</td>
+        <td>1. Ir a /home<br>2. Abrir detalle de tarea propia<br>3. Modificar y guardar checklist</td>
+        <td>Cambios guardados en backend. Estado de tarea actualizado en pantalla.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Kanban ── -->
+  <h3>4.7 Módulo: Tablero Kanban</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-KAN-01</td>
+        <td>Visualizar tareas agrupadas por estado</td>
+        <td>Tareas en distintos estados</td>
+        <td>1. Ir a /kanban</td>
+        <td>Columnas "Pendiente", "En Progreso", "Hecho" y "Bloqueado" con las tarjetas correspondientes.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-KAN-02</td>
+        <td>Mover tarjeta entre columnas (drag-and-drop)</td>
+        <td>Sesión ADMINISTRADOR o SUPERVISOR, tarea en columna Pendiente</td>
+        <td>1. Arrastrar una tarjeta de "Pendiente" a "En Progreso"<br>2. Soltar</td>
+        <td>Tarjeta se mueve de columna. Estado actualizado en backend. Cambio persiste al recargar.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-KAN-03</td>
+        <td>TRABAJADOR solo ve tarjetas propias en Kanban</td>
+        <td>Sesión con rol TRABAJADOR</td>
+        <td>1. Ir a /kanban</td>
+        <td>Solo aparecen las tareas asignadas al trabajador logueado.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-KAN-04</td>
+        <td>Buscar tarea en tablero Kanban</td>
+        <td>Tareas existentes en el tablero</td>
+        <td>1. Escribir texto en el buscador del Kanban</td>
+        <td>Solo se muestran tarjetas que coinciden con el texto buscado.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-KAN-05</td>
+        <td>Ver detalle de tarea desde tarjeta Kanban</td>
+        <td>Tareas visibles en el tablero</td>
+        <td>1. Hacer clic en el ícono de detalle de una tarjeta</td>
+        <td>Panel lateral de detalle se abre con información y checklist de la tarea.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo Dashboard ── -->
+  <h3>4.8 Módulo: Dashboard / Panel de Supervisión</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-DASH-01</td>
+        <td>Dashboard administrativo muestra métricas globales</td>
+        <td>Sesión ADMINISTRADOR o SUPERVISOR, tareas existentes</td>
+        <td>1. Ir a /home</td>
+        <td>Se muestran contadores por estado (Pendiente, En Progreso, Hecho, Bloqueado) y gráfico de barras.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-DASH-02</td>
+        <td>Filtrar métricas por período</td>
+        <td>Dashboard administrativo visible</td>
+        <td>1. Cambiar selector de período a "Esta semana", "Este mes", "Hoy" y "Todo"</td>
+        <td>Los contadores y el gráfico se actualizan correctamente según el período.</td>
+        <td><span class="badge badge-media">Media</span></td>
+      </tr>
+      <tr>
+        <td>CP-DASH-03</td>
+        <td>Dashboard trabajador muestra solo tareas propias</td>
+        <td>Sesión TRABAJADOR, tareas propias existentes</td>
+        <td>1. Ir a /home como TRABAJADOR</td>
+        <td>Se muestran únicamente las tareas asignadas al trabajador con sus estados.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Módulo API ── -->
+  <h3>4.9 Módulo: Integración con API REST</h3>
+
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Descripción</th><th>Precondiciones</th><th>Pasos</th><th>Resultado esperado</th><th>Prioridad</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>CP-API-01</td>
+        <td>Token JWT se envía en cabecera Authorization</td>
+        <td>Sesión activa</td>
+        <td>1. Abrir DevTools → Network<br>2. Realizar cualquier llamada autenticada (ej. cargar tareas)</td>
+        <td>Cabecera <code>Authorization: Bearer &lt;token&gt;</code> presente en la petición.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-API-02</td>
+        <td>Respuesta 401 del backend cierra sesión</td>
+        <td>Token inválido o expirado en servidor</td>
+        <td>1. Alterar el token en localStorage a un valor inválido<br>2. Realizar una acción</td>
+        <td>El interceptor de Axios detecta el 401 y redirige a /login limpiando la sesión.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+      <tr>
+        <td>CP-API-03</td>
+        <td>Carga de datos desde backend en entorno cloud</td>
+        <td>Backend en AWS EC2 operativo, base de datos en RDS PostgreSQL</td>
+        <td>1. Acceder a la aplicación desde la instancia EC2 de frontend<br>2. Iniciar sesión y navegar a /tasks</td>
+        <td>Datos cargados correctamente desde la API REST en producción sin errores CORS.</td>
+        <td><span class="badge badge-alta">Alta</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <h2>5. Criterios de Aceptación</h2>
+  <div class="section-intro">
+    El plan se considera superado cuando se cumplen todos los criterios listados a continuación.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Criterio</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Todos los casos de prueba de prioridad Alta son aprobados sin errores bloqueantes.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>2</td><td>No existen fugas de permisos entre roles (TRABAJADOR no accede a vistas de ADMIN).</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>3</td><td>El checklist se guarda correctamente en backend y aplica fallback local si el servidor falla.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>4</td><td>El drag-and-drop del Kanban actualiza el estado de la tarea en el backend.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>5</td><td>La aplicación en cloud (EC2 frontend + EC2 backend + RDS PostgreSQL) responde sin errores CORS y con datos reales.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>6</td><td>No hay errores de compilación en los archivos críticos del proyecto.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>6. Entorno de Pruebas</h2>
+
+  <table>
+    <thead>
+      <tr><th>Componente</th><th>Detalle</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Frontend</td><td>Instancia AWS EC2 (React + Vite, build estático servido)</td></tr>
+      <tr><td>Backend</td><td>Instancia AWS EC2 — Spring Boot (Java), puerto 5000</td></tr>
+      <tr><td>Base de datos</td><td>Amazon RDS — PostgreSQL</td></tr>
+      <tr><td>Framework frontend</td><td>React 19 + Vite 8</td></tr>
+      <tr><td>Framework backend</td><td>Spring Boot (Java)</td></tr>
+      <tr><td>Autenticación</td><td>JWT Bearer Token</td></tr>
+      <tr><td>Navegadores probados</td><td>Google Chrome (última versión), Mozilla Firefox</td></tr>
+      <tr><td>Dispositivos</td><td>Desktop (≥992px), Tablet (768–991px), Móvil (≤767px)</td></tr>
+      <tr><td>Herramientas de apoyo</td><td>DevTools (Network, Console), Postman para verificación de endpoints</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    RoomOps — Plan de Pruebas Frontend v1.0 &nbsp;|&nbsp; Mayo 2026
+  </footer>
+
+</body>
+</html>

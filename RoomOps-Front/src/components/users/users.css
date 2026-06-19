@@ -1,0 +1,257 @@
+.users-view {
+  width: 100%;
+}
+
+.users-card {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.users-toolbar {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.users-toolbar .users-search {
+  /* Busqueda flexible con tope configurable por estado del sidebar. */
+  flex: 1 1 24rem;
+  min-width: 16rem;
+  max-width: var(--users-search-max, 40rem);
+  transition: max-width 0.2s ease, min-width 0.2s ease;
+}
+
+.users-filter-btn {
+  white-space: nowrap;
+}
+
+.app-shell.sidebar-expanded {
+  /* Con sidebar abierto, el buscador reduce su ancho maximo para evitar saltos. */
+  --users-search-max: 28rem;
+}
+
+.app-shell.sidebar-narrow {
+  /* Con sidebar acoplado, el buscador puede crecer mas. */
+  --users-search-max: 40rem;
+}
+
+/* Contenedor con scroll horizontal para que la tabla no rompa el layout en mobile. */
+.users-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.users-table {
+  /* Ancho completo; el min-width se ajusta por breakpoint. */
+  width: 100%;
+  min-width: 0;
+}
+
+/* En tablet+ aparecen las columnas ocultas; reforzar min-width para que no queden comprimidas. */
+@media (min-width: 576px) {
+  .users-table {
+    min-width: 480px;
+  }
+}
+
+@media (min-width: 768px) {
+  .users-table {
+    min-width: 600px;
+  }
+}
+
+.users-footer {
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.users-actions {
+  min-width: 132px;
+}
+
+.users-action-btn {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-action-btn:hover,
+.users-action-btn:focus {
+  border-color: #b9c4cf;
+  background-color: #f3f6f9;
+  color: #22313f;
+}
+
+.users-action-btn-danger {
+  color: #ffffff;
+}
+
+.users-action-btn-danger:hover,
+.users-action-btn-danger:focus {
+  border-color: #e6a39b;
+  background-color: #fdf1ef;
+  color: #a52922;
+}
+
+.users-action-btn-success {
+  color: #ffffff;
+}
+
+.users-action-btn-success:hover,
+.users-action-btn-success:focus {
+  border-color: #9be69b;
+  background-color: #d7f8d2;
+  color: #22a53e;
+}
+
+@media (max-width: 767px) {
+  /* En movil, toolbar y footer pasan a columna para evitar cortes horizontales. */
+  .users-toolbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .users-toolbar .users-search,
+  .app-shell.sidebar-expanded .users-toolbar .users-search,
+  .app-shell.sidebar-narrow .users-toolbar .users-search {
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .users-footer {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .users-footer .pagination {
+    /* Paginación más compacta en mobile. */
+    font-size: 0.85rem;
+  }
+
+  .users-actions {
+    min-width: 0;
+  }
+
+  /* Header de la tarjeta en mobile. */
+  .users-card .card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  /* En tablet, toolbar y footer pasan a columna para evitar cortes horizontales. */
+  .users-toolbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .users-toolbar .users-search,
+  .app-shell.sidebar-expanded .users-toolbar .users-search,
+  .app-shell.sidebar-narrow .users-toolbar .users-search {
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .users-footer {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .users-actions {
+    min-width: 0;
+  }
+}
+
+.users-create-modal-popup {
+  background: #1a1a2e;
+  border: 1px solid #2d3b52;
+  border-radius: 12px;
+  font-family: 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  box-shadow: 0 22px 48px rgba(6, 10, 22, 0.56);
+}
+
+.users-create-modal-title {
+  color: #f8fbff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.45rem;
+  padding: 0.4rem 1.6rem 0;
+}
+
+.users-create-modal-content {
+  padding: 0.8rem 1.6rem 0.4rem;
+}
+
+.users-create-modal-form {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.users-create-input {
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  border: 1px solid #2f3f58;
+  background: #111a2a;
+  color: #edf3ff;
+  outline: none;
+  box-shadow: none;
+}
+
+.users-create-input::placeholder {
+  color: #8f9db0;
+}
+
+.users-create-input:focus {
+  border-color: #7f9bb3;
+  box-shadow: 0 0 0 2px rgba(127, 155, 179, 0.22);
+}
+
+.users-create-select {
+  appearance: none;
+}
+
+.users-create-modal-confirm {
+  border: 0;
+  border-radius: 10px;
+  background: #7f9bb3;
+  color: #101826;
+  font-weight: 700;
+  padding: 0.65rem 1.1rem;
+}
+
+.users-create-modal-confirm:hover,
+.users-create-modal-confirm:focus {
+  background: #9ab2c7;
+}
+
+.users-create-modal-cancel {
+  border: 1px solid #5f6c81;
+  border-radius: 10px;
+  background: transparent;
+  color: #aab3c2;
+  font-weight: 600;
+  padding: 0.65rem 1.1rem;
+}
+
+.users-create-modal-cancel:hover,
+.users-create-modal-cancel:focus {
+  border-color: #8a97ad;
+  color: #d0d7e4;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.users-create-modal-popup .swal2-actions {
+  gap: 1rem;
+  margin-top: 1.4rem;
+}

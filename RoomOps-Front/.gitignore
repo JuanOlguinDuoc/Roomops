@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+
+# Builds
+dist/
+
+# Archivos de entorno
+.env
+.env.*
+
+# Cachés y logs
+.vite/
+*.log
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Documentos
+*.pdf
+*.PDF
+*.md
+*.MD
+
+# Carpeta backend local
+roomops/

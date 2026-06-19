@@ -1,0 +1,211 @@
+.sidebar-narrow-unfoldable:not(:hover) .sidebar-footer .nav-link span {
+  display: none;
+}
+
+/* ── Backdrop mobile ─────────────────────────────────────── */
+.sidebar-mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar-mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1040;
+    backdrop-filter: blur(2px);
+  }
+}
+
+.roomops-sidebar {
+  /* Variables de CoreUI enlazadas con la paleta global de RoomOps. */
+  --cui-sidebar-bg: var(--roomops-surface);
+  --cui-sidebar-color: var(--roomops-text-muted);
+  --cui-sidebar-brand-color: var(--roomops-text);
+  --cui-sidebar-nav-link-color: var(--roomops-text-muted);
+  --cui-sidebar-nav-link-icon-color: var(--roomops-text-muted);
+  --cui-sidebar-nav-link-hover-bg: var(--roomops-accent-soft);
+  --cui-sidebar-nav-link-hover-color: var(--roomops-text);
+  background: linear-gradient(180deg, var(--roomops-bg-2) 0%, var(--roomops-bg-1) 62%, var(--roomops-bg-1) 100%) !important;
+  border-right: 1px solid var(--roomops-border) !important;
+  color: var(--roomops-text-muted);
+}
+
+.app-shell .roomops-sidebar {
+  /* Mantiene el sidebar dentro del flujo horizontal y evita superposicion sobre el main. */
+  position: sticky !important;
+  top: 0;
+  left: auto !important;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  height: 100vh;
+  z-index: 20;
+}
+
+.app-shell.sidebar-narrow .roomops-sidebar {
+  /* Ancho cuando esta colapsado. */
+  width: 4rem !important;
+}
+
+.app-shell.sidebar-expanded .roomops-sidebar {
+  /* Ancho cuando esta expandido. */
+  width: 16rem !important;
+}
+
+.roomops-sidebar .sidebar-header,
+.roomops-sidebar .sidebar-footer {
+  border-color: var(--roomops-border) !important;
+}
+
+.roomops-sidebar .sidebar-brand span {
+  color: var(--roomops-text);
+}
+
+.roomops-sidebar .sidebar-nav .nav-title {
+  color: var(--roomops-text);
+  letter-spacing: 0.08em;
+}
+
+.roomops-sidebar .sidebar-nav .nav-link {
+  border-radius: 10px;
+  color: var(--roomops-text-muted);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.roomops-sidebar .sidebar-nav .nav-link .nav-icon,
+.roomops-sidebar .sidebar-nav .nav-link svg {
+  color: var(--roomops-text-muted);
+  transition: color 0.2s ease;
+}
+
+.roomops-sidebar .sidebar-nav .nav-link.active,
+.roomops-sidebar .sidebar-nav .nav-link:focus-visible {
+  background-color: var(--roomops-accent-soft);
+  color: var(--roomops-accent);
+}
+
+.roomops-sidebar .sidebar-nav .nav-link.active .nav-icon,
+.roomops-sidebar .sidebar-nav .nav-link.active svg,
+.roomops-sidebar .sidebar-nav .nav-link:focus-visible .nav-icon,
+.roomops-sidebar .sidebar-nav .nav-link:focus-visible svg {
+  color: var(--roomops-accent);
+}
+
+.roomops-sidebar .sidebar-nav .nav-link:hover {
+  background-color: var(--roomops-accent);
+  color: #120f24;
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.38), 0 0 12px rgba(167, 139, 250, 0.32);
+}
+
+.roomops-sidebar .sidebar-nav .nav-link:hover .nav-icon,
+.roomops-sidebar .sidebar-nav .nav-link:hover svg {
+  color: #120f24;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar {
+  --cui-sidebar-color: #e9edf8;
+  --cui-sidebar-brand-color: #ffffff;
+  --cui-sidebar-nav-link-color: #e9edf8;
+  --cui-sidebar-nav-link-icon-color: #d8def0;
+  --cui-sidebar-nav-link-hover-bg: rgba(255, 255, 255, 0.18);
+  --cui-sidebar-nav-link-hover-color: #ffffff;
+  background: linear-gradient(180deg, #666da3 0%, #6688a2 52%, #719eaa 100%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.22) !important;
+  color: #e9edf8;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-header,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-footer {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-brand span,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-title {
+  color: #ffffff;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link {
+  color: #e9edf8;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link .nav-icon,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link svg {
+  color: #d8def0;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link.active,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:focus-visible {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link.active .nav-icon,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link.active svg,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:focus-visible .nav-icon,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:focus-visible svg {
+  color: #ffffff;
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18), 0 8px 16px rgba(45, 62, 95, 0.32);
+}
+
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:hover .nav-icon,
+html:not(.theme-logo-dark) .roomops-sidebar .sidebar-nav .nav-link:hover svg {
+  color: #ffffff;
+}
+
+html.theme-logo-dark .roomops-sidebar .sidebar-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18), 0 8px 16px rgba(45, 62, 95, 0.32);
+}
+
+html.theme-logo-dark .roomops-sidebar .sidebar-nav .nav-link:hover .nav-icon,
+html.theme-logo-dark .roomops-sidebar .sidebar-nav .nav-link:hover svg {
+  color: #ffffff;
+}
+
+/* ── Tablet (768-991px): CoreUI trata <992px como mobile y oculta el sidebar.
+   Forzamos que se muestre y comporte como desktop. ──────────────────────────── */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .app-shell .roomops-sidebar {
+    /* CoreUI aplica position:fixed y margin-inline-start negativo en <992px.
+       Aquí lo revertimos a comportamiento de escritorio. */
+    position: sticky !important;
+    top: 0;
+    height: 100vh;
+    margin-inline-start: 0 !important;
+    width: 16rem !important;
+    /* Anulamos el marcador interno que CoreUI usa para detectar mobile. */
+    --cui-is-mobile: ;
+  }
+
+  /* En tablet forzamos modo expandido y evitamos mini sidebar. */
+  .app-shell.sidebar-narrow .roomops-sidebar,
+  .app-shell.sidebar-expanded .roomops-sidebar {
+    width: 16rem !important;
+  }
+}
+
+/* ── Mobile (<768px): override position:sticky del base para que CoreUI pueda
+   usar position:fixed y gestionar el drawer via margin-inline-start. ────────── */
+@media (max-width: 767px) {
+  .app-shell .roomops-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100dvh !important;
+    z-index: 1050 !important;
+    width: 16rem !important;
+  }
+
+  /* En mobile el sidebar abre como overlay; evita layout shifts. */
+  .app-shell.sidebar-narrow .roomops-sidebar,
+  .app-shell.sidebar-expanded .roomops-sidebar {
+    width: 16rem !important;
+  }
+}
