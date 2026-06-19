@@ -1,0 +1,453 @@
+{
+  "info": {
+    "name": "RoomOps API (Apidog Compatible)",
+    "description": "Coleccion simplificada para importar en Apidog/Postman. Endpoints obtenidos desde controllers y credenciales seed desde Initializer.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@duoc.cl\",\n  \"password\": \"admin123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "Login Supervisor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"supervisor@duoc.cl\",\n  \"password\": \"supervisor123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "Login Trabajador",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"trabajador@duoc.cl\",\n  \"password\": \"trabajador123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/users"
+          }
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"run\": \"12345678-9\",\n  \"firstName\": \"Juan\",\n  \"lastName\": \"Perez\",\n  \"email\": \"juan.perez@duoc.cl\",\n  \"password\": \"secreto123\",\n  \"role\": \"TRABAJADOR\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/users"
+          }
+        },
+        {
+          "name": "Get User By Email",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/by-email?email=admin@duoc.cl",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users", "by-email"],
+              "query": [
+                { "key": "email", "value": "admin@duoc.cl" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"run\": \"00000000-0\",\n  \"firstName\": \"admin\",\n  \"lastName\": \"actualizado\",\n  \"email\": \"admin@duoc.cl\",\n  \"password\": \"admin123\",\n  \"role\": \"ADMINISTRADOR\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/users/1"
+          }
+        },
+        {
+          "name": "Patch User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"AdminPatch\",\n  \"lastName\": \"Demo\",\n  \"email\": \"admin@duoc.cl\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/users/1"
+          }
+        },
+        {
+          "name": "Patch User Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/users/1/estado?activo=false",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "users", "1", "estado"],
+              "query": [
+                { "key": "activo", "value": "false" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "List Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/roles"
+          }
+        },
+        {
+          "name": "Create Role",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"AUDITOR\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/roles"
+          }
+        },
+        {
+          "name": "Get Role By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/roles/1"
+          }
+        },
+        {
+          "name": "Update Role",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"SUPERVISOR_JEFE\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/roles/1"
+          }
+        },
+        {
+          "name": "Delete Role",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/roles/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Status",
+      "item": [
+        {
+          "name": "List Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/status"
+          }
+        },
+        {
+          "name": "Create Status",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pendiente QA\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/status"
+          }
+        },
+        {
+          "name": "Get Status By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/status/1"
+          }
+        },
+        {
+          "name": "Update Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"En revision\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/status/1"
+          }
+        },
+        {
+          "name": "Delete Status",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/status/1"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Apartments",
+      "item": [
+        {
+          "name": "List Apartments",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/apartments"
+          }
+        },
+        {
+          "name": "Create Apartment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"E801\",\n  \"piso\": 8,\n  \"activo\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/apartments"
+          }
+        },
+        {
+          "name": "Get Apartment By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/apartments/1"
+          }
+        },
+        {
+          "name": "Update Apartment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"A101\",\n  \"piso\": 1,\n  \"activo\": true\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/apartments/1"
+          }
+        },
+        {
+          "name": "Patch Apartment",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"A101-EDIT\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/apartments/1"
+          }
+        },
+        {
+          "name": "Patch Apartment Estado",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/apartments/1/estado?activo=false",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5000",
+              "path": ["api", "v1", "apartments", "1", "estado"],
+              "query": [
+                { "key": "activo", "value": "false" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/tasks"
+          }
+        },
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Limpieza profunda\",\n  \"descripcion\": \"Limpieza completa del departamento\",\n  \"tipo\": \"LIMPIEZA\",\n  \"prioridad\": \"ALTA\",\n  \"fecha\": \"2026-06-15\",\n  \"horaLimite\": \"14:00\",\n  \"apartamentoId\": 1,\n  \"usuarioAsignadoId\": 3,\n  \"estadoId\": 1,\n  \"listaVerificacion\": [\n    {\n      \"descripcion\": \"Cambiar sabanas\",\n      \"estado\": false,\n      \"nota\": \"Usar set blanco\"\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/tasks"
+          }
+        },
+        {
+          "name": "Get Task By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/tasks/1"
+          }
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Limpieza final\",\n  \"descripcion\": \"Checklist final antes de check-in\",\n  \"tipo\": \"LIMPIEZA\",\n  \"prioridad\": \"MEDIA\",\n  \"fecha\": \"2026-06-16\",\n  \"horaLimite\": \"16:00\",\n  \"apartamentoId\": 1,\n  \"usuarioAsignadoId\": 3,\n  \"estadoId\": 2,\n  \"listaVerificacion\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "http://localhost:5000/api/v1/tasks/1"
+          }
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer REEMPLAZAR_TOKEN" }
+            ],
+            "url": "http://localhost:5000/api/v1/tasks/1"
+          }
+        }
+      ]
+    }
+  ]
+}

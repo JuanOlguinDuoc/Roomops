@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Pruebas - RoomOps Backend</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 11pt;
+      color: #1a1a2e;
+      background: #ffffff;
+      padding: 40px 50px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 18pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      border-bottom: 3px solid #4f46e5;
+      padding-bottom: 8px;
+      margin-bottom: 6px;
+    }
+
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #555;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 28px 0 10px;
+      border-left: 4px solid #4f46e5;
+      padding-left: 10px;
+    }
+
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #2d2d6e;
+      margin: 18px 0 6px;
+    }
+
+    p { margin-bottom: 8px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 10pt;
+    }
+
+    thead tr {
+      background-color: #4f46e5;
+      color: #ffffff;
+    }
+
+    thead th {
+      padding: 9px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(even) { background-color: #f5f5ff; }
+    tbody tr:nth-child(odd)  { background-color: #ffffff; }
+
+    tbody td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #ddd;
+      vertical-align: top;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 9pt;
+      font-weight: 600;
+    }
+
+    .badge-alta    { background: #fee2e2; color: #991b1b; }
+    .badge-media   { background: #fef3c7; color: #92400e; }
+    .badge-baja    { background: #dcfce7; color: #166534; }
+    .badge-ok      { background: #dcfce7; color: #166534; }
+    .badge-unit    { background: #dbeafe; color: #0c4a6e; }
+    .badge-integration { background: #f3e8ff; color: #581c87; }
+    .badge-security { background: #fed7aa; color: #92400e; }
+
+    .section-intro {
+      background: #f0f0ff;
+      border-left: 4px solid #4f46e5;
+      padding: 10px 14px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+      font-size: 10pt;
+    }
+
+    .matrix-table thead tr { background-color: #1a1a2e; }
+
+    ul { padding-left: 20px; margin-bottom: 8px; }
+    li { margin-bottom: 3px; }
+
+    .page-break { page-break-before: always; }
+
+    footer {
+      margin-top: 40px;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      font-size: 9pt;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Plan de Pruebas — RoomOps Backend</h1>
+  <p class="doc-meta">
+    Proyecto: RoomOps &nbsp;|&nbsp; Módulo: Backend (Spring Boot 3.3.5 - Java 17) &nbsp;|&nbsp;
+    Versión: 1.0 &nbsp;|&nbsp; Fecha: mayo 2026 &nbsp;|&nbsp; Tipo: Pruebas Automatizadas
+  </p>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>1. Objetivos del Plan</h2>
+  <p>
+    El presente plan de pruebas tiene como finalidad verificar que las funcionalidades implementadas en el
+    backend de RoomOps se comporten correctamente según los requerimientos definidos, cubriendo los controladores REST,
+    servicios de negocio, autenticación JWT, autorización basada en roles (RBAC) y persistencia de datos en PostgreSQL.
+  </p>
+  <p>Las pruebas son de carácter <strong>automatizado</strong>, ejecutadas mediante JUnit 5, Mockito y Spring Test Framework,
+  con cobertura medida mediante JaCoCo.</p>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>2. Alcance de las Pruebas</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Módulo</th>
+        <th>Incluido</th>
+        <th>Observaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Autenticación (JWT)</td><td><span class="badge badge-ok">Sí</span></td><td>Token Bearer, expiración, validación</td></tr>
+      <tr><td>Control de acceso por rol (RBAC)</td><td><span class="badge badge-ok">Sí</span></td><td>Roles: ADMINISTRADOR, SUPERVISOR, TRABAJADOR</td></tr>
+      <tr><td>Controlador de Usuarios</td><td><span class="badge badge-ok">Sí</span></td><td>CRUD, filtros, estados activo/inactivo</td></tr>
+      <tr><td>Controlador de Apartamentos</td><td><span class="badge badge-ok">Sí</span></td><td>CRUD, filtros por piso</td></tr>
+      <tr><td>Controlador de Tareas</td><td><span class="badge badge-ok">Sí</span></td><td>CRUD, cambio de estado, asignaciones</td></tr>
+      <tr><td>Controlador de Roles</td><td><span class="badge badge-ok">Sí</span></td><td>Consulta y gestión de roles</td></tr>
+      <tr><td>Controlador de Estados</td><td><span class="badge badge-ok">Sí</span></td><td>Consulta de estados de tareas</td></tr>
+      <tr><td>Servicios de Negocio</td><td><span class="badge badge-ok">Sí</span></td><td>Validaciones, transformaciones DTO</td></tr>
+      <tr><td>Repositorios JPA</td><td><span class="badge badge-ok">Sí</span></td><td>Persistencia y consultas</td></tr>
+      <tr><td>Configuración de Seguridad</td><td><span class="badge badge-ok">Sí</span></td><td>CORS, SecurityConfig</td></tr>
+      <tr><td>Pruebas de carga/estrés</td><td><span class="badge badge-baja">No</span></td><td>Fuera del alcance inicial</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>3. Estrategia de Pruebas</h2>
+  <div class="section-intro">
+    Se adopta la pirámide de pruebas: 60-70% unitarias, 15-20% integración, 10-15% seguridad.
+  </div>
+
+  <table class="matrix-table">
+    <thead>
+      <tr>
+        <th>Tipo de Prueba</th>
+        <th>Descripción</th>
+        <th>Herramienta</th>
+        <th>Cobertura %</th>
+        <th>Prioridad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="badge badge-unit">Unitarias</span></td><td>Lógica de servicios aislada</td><td>JUnit 5 + Mockito</td><td>60-70%</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td><span class="badge badge-integration">Integración</span></td><td>Endpoints REST + capas</td><td>Spring Test + MockMvc</td><td>15-20%</td><td><span class="badge badge-alta">Alta</span></td></tr>
+      <tr><td><span class="badge badge-security">Seguridad</span></td><td>Autenticación, autorización, CORS</td><td>Spring Security Test</td><td>10-15%</td><td><span class="badge badge-alta">Alta</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>4. Matriz de Pruebas por Componente</h2>
+
+  <h3>4.1 Pruebas de Controladores</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Controlador</th>
+        <th>Tipo</th>
+        <th>Casos Cubiertos</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>UserController</td><td><span class="badge badge-integration">Integración</span></td><td>CRUD, listado, filtros, roles</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>RoleController</td><td><span class="badge badge-integration">Integración</span></td><td>Consulta, gestión de roles</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>ApartmentController</td><td><span class="badge badge-integration">Integración</span></td><td>CRUD, filtros, estados</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>TaskController</td><td><span class="badge badge-integration">Integración</span></td><td>CRUD, asignaciones, estados</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>StatusController</td><td><span class="badge badge-integration">Integración</span></td><td>Consulta de estados</td><td><span class="badge badge-ok">✓</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 Pruebas de Servicios</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Servicio</th>
+        <th>Tipo</th>
+        <th>Métodos Cubiertos</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>UserService</td><td><span class="badge badge-unit">Unitaria</span></td><td>getUsers, findById, save, update, delete</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>RoleService</td><td><span class="badge badge-unit">Unitaria</span></td><td>getRoles, findById, save, delete</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>ApartmentService</td><td><span class="badge badge-unit">Unitaria</span></td><td>getApartments, findById, filter</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>TaskService</td><td><span class="badge badge-unit">Unitaria</span></td><td>getTasks, createTask, updateTask, completeTask</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>StatusService</td><td><span class="badge badge-unit">Unitaria</span></td><td>getStatuses, updateStatus</td><td><span class="badge badge-ok">✓</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.3 Pruebas de Seguridad</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th>Caso de Prueba</th>
+        <th>Resultado Esperado</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Autenticación JWT</td><td>Token inválido rechazado</td><td>401 Unauthorized</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>Autorización Roles</td><td>Usuario sin rol accede endpoint protegido</td><td>403 Forbidden</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>CORS</td><td>Origen no permitido realiza solicitud</td><td>Solicitud bloqueada</td><td><span class="badge badge-ok">✓</span></td></tr>
+      <tr><td>Control de Acceso</td><td>Usuario accede datos de otro usuario</td><td>Acceso denegado</td><td><span class="badge badge-ok">✓</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="page-break"></div>
+  <h2>5. Criterios de Aceptación</h2>
+  <div class="section-intro">
+    El plan se considera superado cuando se cumplen todos los criterios listados a continuación.
+  </div>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Criterio</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Todos los casos de prueba de prioridad Alta son aprobados sin errores bloqueantes.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>2</td><td>No existen fugas de permisos entre roles (TRABAJADOR no accede vistas ADMIN).</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>3</td><td>Cobertura de código mínimo 70% en servicios críticos.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>4</td><td>Todos los endpoints REST retornan status HTTP correcto según lógica.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>5</td><td>Las pruebas no contienen dependencias de orden de ejecución.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+      <tr><td>6</td><td>Suite completa ejecuta en menos de 5 minutos.</td><td><span class="badge badge-ok">Aprobado</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>6. Entorno de Pruebas</h2>
+
+  <table>
+    <thead>
+      <tr><th>Componente</th><th>Detalle</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Framework Backend</td><td>Spring Boot 3.3.5</td></tr>
+      <tr><td>Lenguaje</td><td>Java 17</td></tr>
+      <tr><td>Base de Datos</td><td>H2 (pruebas unitarias), PostgreSQL (integración/producción)</td></tr>
+      <tr><td>Autenticación</td><td>JWT Bearer Token</td></tr>
+      <tr><td>Framework de Pruebas</td><td>JUnit 5 + Mockito + Spring Test</td></tr>
+      <tr><td>Cobertura</td><td>JaCoCo (Maven plugin)</td></tr>
+      <tr><td>Constructor</td><td>Maven 3.9+</td></tr>
+      <tr><td>IDE</td><td>VSCode, IntelliJ IDEA</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>7. Herramientas y Configuración</h2>
+
+  <h3>7.1 Stack Tecnológico</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Herramienta</th>
+        <th>Versión</th>
+        <th>Propósito</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>JUnit 5</td><td>Incluido en Spring Boot 3.3.5</td><td>Framework de pruebas</td></tr>
+      <tr><td>Mockito</td><td>Latest (via Spring Boot)</td><td>Mock de dependencias</td></tr>
+      <tr><td>Spring Test</td><td>3.3.5</td><td>Pruebas de integración</td></tr>
+      <tr><td>Spring Security Test</td><td>3.3.5</td><td>Pruebas de auth/autorización</td></tr>
+      <tr><td>JaCoCo</td><td>Latest (Maven Plugin)</td><td>Cobertura de código</td></tr>
+      <tr><td>Maven Surefire</td><td>Latest (Maven Plugin)</td><td>Ejecución de pruebas</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.2 Comando de Ejecución</h3>
+
+  <p style="margin-bottom: 14px;"><strong>Ejecutar todas las pruebas y generar reporte de cobertura:</strong></p>
+  <p style="margin-bottom: 8px; padding: 10px; background: #f0f0ff; border-radius: 4px; font-family: monospace; font-size: 9.5pt;">
+    mvn clean test jacoco:report
+  </p>
+  <p style="margin-bottom: 14px;">Reporte disponible en: <code>target/site/jacoco/index.html</code></p>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>8. Cronograma de Ejecución</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Fase</th>
+        <th>Descripción</th>
+        <th>Duración</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Fase 1</strong></td><td>Pruebas Unitarias - Servicios y utilidades</td><td>1-2 semanas</td></tr>
+      <tr><td><strong>Fase 2</strong></td><td>Pruebas de Integración - Endpoints REST</td><td>1 semana</td></tr>
+      <tr><td><strong>Fase 3</strong></td><td>Pruebas de Seguridad - JWT, RBAC, CORS</td><td>3-5 días</td></tr>
+      <tr><td><strong>Fase 4</strong></td><td>Análisis y reportes - Cobertura y gaps</td><td>3-5 días</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>9. Gestión de Defectos</h2>
+
+  <table>
+    <thead>
+      <tr><th>Severidad</th><th>Descripción</th><th>Ejemplo</th><th>Plazo</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="badge badge-alta">CRÍTICA</span></td><td>Sistema inoperativo, seguridad comprometida</td><td>Fallo de autenticación</td><td>Inmediato</td></tr>
+      <tr><td><span class="badge badge-media">ALTA</span></td><td>Funcionalidad principal no funciona</td><td>CRUD de usuarios falla</td><td>24 horas</td></tr>
+      <tr><td><span class="badge badge-media">MEDIA</span></td><td>Funcionalidad secundaria afectada</td><td>Validación incompleta</td><td>1 semana</td></tr>
+      <tr><td><span class="badge badge-baja">BAJA</span></td><td>Mejoras menores</td><td>Formato de respuesta</td><td>Próximo sprint</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>10. Mejores Prácticas</h2>
+
+  <h3>10.1 Patrón AAA (Arrange-Act-Assert)</h3>
+  <p><strong>Arrange:</strong> Preparar datos y contexto &nbsp;|&nbsp;
+  <strong>Act:</strong> Ejecutar acción &nbsp;|&nbsp;
+  <strong>Assert:</strong> Verificar resultados</p>
+
+  <h3>10.2 Independencia de Pruebas</h3>
+  <ul>
+    <li>Cada prueba debe ser independiente de otras</li>
+    <li>Usar setUp() y tearDown() para limpiar estado</li>
+    <li>No debe haber dependencias de orden de ejecución</li>
+  </ul>
+
+  <h3>10.3 Nombres Descriptivos</h3>
+  <p>✓ <code>testGetUsersReturnsListWhenDatabaseNotEmpty()</code></p>
+  <p>✗ <code>test1()</code></p>
+
+  <h3>10.4 Evitar Pruebas Frágiles</h3>
+  <ul>
+    <li>No usar esperas (Thread.sleep) con valores fijos</li>
+    <li>Evitar dependencias externas en unitarias</li>
+    <li>Usar fixtures y builders para datos complejos</li>
+  </ul>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <h2>11. Conclusiones</h2>
+
+  <p>Este plan de pruebas establece un marco sólido para garantizar la calidad del backend de RoomOps. La combinación de pruebas unitarias, de integración y de seguridad proporciona cobertura integral del sistema.</p>
+
+  <p>Se espera que la implementación sistemática de este plan resulte en:</p>
+  <ul>
+    <li>Mínimo 80% de cobertura de código en componentes críticos</li>
+    <li>Sistema seguro con autenticación y autorización validadas</li>
+    <li>Confianza en la confiabilidad del sistema</li>
+    <li>Facilitar mantenimiento y refactorización futura</li>
+    <li>Permitir despliegue seguro en producción</li>
+  </ul>
+
+  <p>La ejecución regular de estas pruebas debe ser parte integral del ciclo de desarrollo, siendo ejecutadas en cada commit y como parte del pipeline CI/CD.</p>
+
+  <footer>
+    RoomOps — Plan de Pruebas Backend v1.0 &nbsp;|&nbsp; Mayo 2026
+  </footer>
+
+</body>
+</html>
