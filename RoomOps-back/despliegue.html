@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Anexo: Guía de Configuración y Despliegue de Infraestructura en AWS</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #2d3748;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        h1 {
+            font-size: 22pt;
+            color: #1a365d;
+            border-bottom: 2px solid #2b6cb0;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .subtitle {
+            font-size: 12pt;
+            color: #4a5568;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        h2 {
+            font-size: 15pt;
+            color: #2b6cb0;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            border-left: 4px solid #1a365d;
+            padding-left: 10px;
+        }
+        h3 {
+            font-size: 12pt;
+            color: #2d3748;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        ol, ul {
+            margin-top: 0;
+            margin-bottom: 12px;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 6px;
+            text-align: justify;
+        }
+        .code-block {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 12px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 10pt;
+            color: #1a202c;
+            white-space: pre-wrap;
+        }
+        .code-comment {
+            color: #718096;
+            font-style: italic;
+        }
+        .important-note {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 10.5pt;
+            color: #2b6cb0;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Anexo: Guía de Configuración y Despliegue de Infraestructura en AWS (RoomOps)</h1>
+    <div class="subtitle">Manual técnico de referencia para el aprovisionamiento de servicios y puesta en marcha del entorno de producción utilizando el grupo de seguridad por defecto.</div>
+
+    <p>Este manual técnico descrita el proceso completo desde cero para la creación, configuración y despliegue de la arquitectura web en Amazon Web Services (AWS), utilizando una base de datos relacional (RDS PostgreSQL), dos instancias de servidores virtuales (EC2) para Frontend y Backend, y la adecuación de las reglas de entrada sobre el grupo de seguridad por defecto (default).</p>
+
+    <h2>1. Creación y Configuración de la Base de Datos (AWS RDS)</h2>
+    
+    <h3>1.1 Crear la instancia de base de datos</h3>
+    <ol>
+        <li><strong>Buscar</strong> el servicio <strong>RDS</strong> en la barra superior de la consola de AWS.</li>
+        <li><strong>Hacer</strong> clic en el botón <strong>Create database</strong> (Crear base de datos).</li>
+        <li>Seleccionar el método de creación <strong>Standard create</strong> (Creación estándar).</li>
+        <li>En las opciones de motor (<em>Engine options</em>), seleccionar <strong>PostgreSQL</strong>.</li>
+        <li>En las plantillas (<em>Templates</em>), elegir <strong>Free Tier</strong> (Capa gratuita) para evitar costos asociados.</li>
+        <li>En la sección de configuración (<em>Settings</em>):
+            <ul>
+                <li>Asignar un identificador a la base de datos (ej. <code>roomops-db</code>).</li>
+                <li>Definir el nombre de usuario maestro (por defecto suele ser <code>postgres</code>).</li>
+                <li>Establecer y guardar en un lugar seguro la contraseña maestra.</li>
+            </ul>
+        </li>
+        <li>En la sección de conectividad (<em>Connectivity</em>):
+            <ul>
+                <li>Configurar el acceso público (<em>Public access</em>) en <strong>Yes</strong> (Sí), para permitir las pruebas de conexión iniciales desde el entorno de desarrollo local.</li>
+            </ul>
+        </li>
+        <li>En la configuración adicional (<em>Additional configuration</em>):
+            <ul>
+                <li>Definir el nombre de la base de datos inicial (ej. <code>roomops</code>).</li>
+            </ul>
+        </li>
+        <li><strong>Hacer</strong> clic en <strong>Create database</strong>. El proceso de aprovisionamiento puede tardar unos minutos hasta que el estado cambie a <strong>Available</strong> (Disponible).</li>
+        <li>Copiar el <strong>Endpoint</strong> (Punto de enlace) generado, el cual servirá como dirección del host en la configuración del Backend.</li>
+    </ol>
+
+    <h2>2. Creación de Instancias Virtuales (AWS EC2)</h2>
+    <p>Se requiere la creación de dos instancias separadas con el sistema operativo Debian o Ubuntu.</p>
+
+    <h3>2.1 Crear la Instancia para el Backend</h3>
+    <ol>
+        <li><strong>Buscar</strong> el servicio <strong>EC2</strong> en la consola de AWS.</li>
+        <li><strong>Hacer</strong> clic en <strong>Launch instance</strong> (Lanzar instancia).</li>
+        <li>Asignar el nombre <code>RoomOps-Backend</code> en la sección de etiquetas.</li>
+        <li>En las imágenes de sistema operativo (<em>Application and OS Images</em>), seleccionar <strong>Debian</strong> (o Ubuntu).</li>
+        <li>En el tipo de instancia (<em>Instance type</em>), seleccionar <strong>t2.micro</strong> (o <strong>t3.micro</strong>, según disponibilidad de la capa gratuita).</li>
+        <li>En el par de claves (<em>Key pair</em>), seleccionar o crear una clave <code>.pem</code> para permitir la posterior conexión SSH mediante Remmina.</li>
+        <li>En la configuración de red (<em>Network settings</em>), seleccionar el grupo de seguridad por defecto (<code>default</code>).</li>
+        <li><strong>Hacer</strong> clic en <strong>Launch instance</strong>.</li>
+    </ol>
+
+    <h3>2.2 Crear la Instancia para el Frontend</h3>
+    <ol>
+        <li>Repetir el proceso anterior haciendo clic en <strong>Launch instance</strong>.</li>
+        <li>Asignar el nombre <code>RoomOps-Frontend</code>.</li>
+        <li>Seleccionar la misma distribución de sistema operativo y tipo de instancia (<code>t2.micro</code>).</li>
+        <li>Seleccionar el mismo par de claves <code>.pem</code>.</li>
+        <li>En la configuración de red, seleccionar igualmente el grupo de seguridad por defecto (<code>default</code>).</li>
+        <li><strong>Hacer</strong> clic en <strong>Launch instance</strong>.</li>
+    </ol>
+
+    <h2>3. Configuración de Red y Reglas del Grupo de Seguridad por Defecto</h2>
+    <p>Es fundamental abrir los puertos correctos en el grupo de seguridad compartido por los recursos para permitir el flujo de datos entre el cliente externo, el Frontend, el Backend y la Base de Datos.</p>
+
+    <h3>3.1 Configurar Reglas de Entrada (Inbound Rules) en el Grupo Default</h3>
+    <ol>
+        <li>Ir a la sección de <strong>Security Groups</strong> dentro del menú izquierdo de EC2.</li>
+        <li>Seleccionar el grupo de seguridad llamado <code>default</code> asignado a la base de datos RDS y a ambas instancias EC2.</li>
+        <li>En la pestaña <strong>Inbound rules</strong> (Reglas de entrada), <strong>hacer</strong> clic en <strong>Edit inbound rules</strong>.</li>
+        <li>Asegurar y añadir las siguientes reglas de entrada para habilitar la conectividad requerida:
+            <ul>
+                <li><strong>Regla 1 (SSH):</strong> Puerto 22 | Source: <code>0.0.0.0/0</code> o la IP del administrador (Permite el acceso a terminales SSH y SFTP desde Remmina).</li>
+                <li><strong>Regla 2 (PostgreSQL):</strong> Puerto 5432 | Source: <code>0.0.0.0/0</code> (Habilita el acceso externo a la base de datos RDS).</li>
+                <li><strong>Regla 3 (Custom TCP):</strong> Puerto 5000 | Source: <code>0.0.0.0/0</code> (Permite al navegador consumir la API REST del Backend y visualizar la interfaz de Swagger).</li>
+                <li><strong>Regla 4 (HTTP):</strong> Puerto 80 | Source: <code>0.0.0.0/0</code> (Habilita el acceso público de usuarios al servidor HTTP Nginx del Frontend).</li>
+            </ul>
+        </li>
+        <li><strong>Hacer</strong> clic en <strong>Save rules</strong> (Guardar reglas) para aplicar los cambios de red en caliente a todos los servicios asociados.</li>
+    </ol>
+
+    <h2>4. Despliegue y Ejecución del Backend (Spring Boot)</h2>
+
+    <h3>4.1 Preparación del código local</h3>
+    <p>Antes de compilar, asegurar que el archivo <code>application.properties</code> o <code>application.yml</code> contenga el Endpoint de la RDS, las credenciales maestras configuradas en el punto 1, y que el archivo <code>SecurityConfig.java</code> incluya la IP pública del Frontend en los orígenes permitidos de CORS.</p>
+    
+    <p>Ejecutar la compilación local en la terminal del Backend:</p>
+    <div class="code-block">mvn clean package</div>
+
+    <h3>4.2 Despliegue en el servidor EC2</h3>
+    <p>Conectarse por SSH a la instancia de Backend mediante Remmina y transferir el archivo <code>.jar</code> generado (ubicado en la carpeta <code>target/</code>) a través del panel SFTP.</p>
+
+    <p>Ejecutar los siguientes comandos en la terminal de la instancia EC2 para limpiar procesos previos y levantar el servicio en segundo plano:</p>
+
+    <div class="code-block"><span class="code-comment"># Liberar de forma preventiva el puerto 5000 ante cualquier ejecución colgada</span>
+sudo kill -9 $(sudo lsof -t -i:5000) 2>/dev/null || true
+
+<span class="code-comment"># Iniciar la aplicación Spring Boot en segundo plano utilizando nohup</span>
+nohup java -jar nombre-del-archivo-backend.jar > backend.log 2>&1 &
+
+<span class="code-comment"># Verificar la correcta asignación del puerto de escucha</span>
+sudo ss -tlnp | grep :5000</div>
+
+    <div class="important-note">
+        Nota: Ejecutar opcionalmente <code>tail -f backend.log</code> para visualizar los registros de inicialización de la API en tiempo real. Se puede salir de dicha vista utilizando la combinación <code>Ctrl + C</code> sin detener el servicio de fondo.
+    </div>
+
+    <h2>5. Despliegue y Ejecución del Frontend (Nginx + React/Vite)</h2>
+
+    <h3>5.1 Preparación del código local</h3>
+    <p>Asegurar que el archivo de configuración del cliente (ej. <code>api.js</code>) apunte a la dirección IP pública y puerto 5000 de la instancia del Backend.</p>
+    
+    <p>Ejecutar la compilación local en la terminal del Frontend:</p>
+    <div class="code-block">npm run build</div>
+    <p><em>(Este comando genera una carpeta llamada <code>dist</code> en la raíz del proyecto).</em></p>
+
+    <h3>5.2 Configuración del Servidor Web Nginx en EC2</h3>
+    <p>Conectarse por SSH a la instancia de Frontend mediante Remmina y ejecutar la instalación del servidor:</p>
+
+    <div class="code-block"><span class="code-comment"># Actualizar el índice de paquetes del sistema operativo</span>
+sudo apt update
+
+<span class="code-comment"># Instalar el servidor web Nginx</span>
+sudo apt install nginx -y
+
+<span class="code-comment"># Habilitar e iniciar el servicio web</span>
+sudo systemctl enable nginx
+sudo systemctl start nginx
+
+<span class="code-comment"># Otorgar privilegios al usuario actual sobre la carpeta raíz de despliegue</span>
+sudo chown -R $USER:$USER /var/www/html
+
+<span class="code-comment"># Eliminar el archivo por defecto de bienvenida de Nginx</span>
+rm -f /var/www/html/index.nginx-debian.html</div>
+
+    <h3>5.3 Transferencia de archivos estáticos</h3>
+    <p>Mediante el panel SFTP de Remmina, entrar a la carpeta local <code>dist</code>, seleccionar <strong>todo su contenido interno</strong> (los archivos sueltos y la carpeta <code>assets</code>) y arrastrarlos directamente hacia el directorio remoto <code>/var/www/html/</code>.</p>
+
+    <h3>5.4 Evitar el error 404 ante recargas de rutas virtuales</h3>
+    <p>Editar el archivo de configuración de Nginx para redirigir el tráfico dinámico al punto de entrada de la SPA:</p>
+    <div class="code-block">sudo nano /etc/nginx/sites-available/default</div>
+
+    <p>Localizar el bloque de directivas <code>location /</code> y sustituir el valor <code>=404</code> por <code>/index.html</code>. Modificar la estructura para que se lea exactamente de la siguiente forma:</p>
+
+    <div class="code-block">location / {
+        try_files $uri $uri/ /index.html;
+}</div>
+
+    <p><em>(Guardar la edición mediante la combinación de teclas <code>Ctrl + O</code>, confirmar con <code>Enter</code> y salir del editor con <code>Ctrl + X</code>).</em></p>
+
+    <h3>5.5 Reinicio y confirmación del Frontend</h3>
+    <p>Validar la configuración y aplicar los cambios estructurales en el servidor web:</p>
+
+    <div class="code-block"><span class="code-comment"># Validar la sintaxis del archivo modificado</span>
+sudo nginx -t
+
+<span class="code-comment"># Reiniciar el servicio web para aplicar las nuevas rutas</span>
+sudo systemctl restart nginx
+
+<span class="code-comment"># Comprobar el estado activo y saludable del servicio</span>
+sudo systemctl status nginx</div>
+
+    <p>A partir de este punto, la arquitectura se encuentra totalmente desplegada y en funcionamiento en entorno de producción.</p>
+
+</body>
+</html>

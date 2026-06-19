@@ -1,0 +1,35 @@
+name: Despliegue Docker local de RoomOps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  despliegue:
+    runs-on: self-hosted
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Construir imagen Docker
+        run: docker build -t roomops:latest .
+
+      - name: Reemplazar contenedor
+        run: |
+          set -e
+          pkill -f "roomops.jar" || true
+          docker rm -f roomops || true
+          docker run -d \
+            --name roomops \
+            --restart unless-stopped \
+            -p 8080:8080 \
+            roomops:latest
+
+      - name: Verificar despliegue
+        run: |
+          sleep 8
+          docker ps --filter "name=roomops"
+          docker logs --tail 50 roomops
