@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>10_UNION_COMPLETA.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="manual-10---unión-completa-todos-los-manuales-en-uno">Manual 10 - Unión Completa (Todos los Manuales en Uno)</h1>
+<p><strong>Versión:</strong> 1.0<br>
+<strong>Fecha:</strong> 2026-05-14<br>
+<strong>Descripción:</strong> Este documento es la unión de todos los manuales (00 al 09) sin cambios en sus contenidos originales. Contiene desde índice hasta guías operacionales, técnicas y de usuario en un solo archivo.</p>
+<hr>
+<h1 id="manual-00---manuales-de-implementacion---roomops-front">MANUAL 00 - Manuales de Implementacion - RoomOps Front</h1>
+<p>Version: 1.0
+Fecha: 2026-05-14
+Publico: tecnico y no tecnico</p>
+<h2 id="objetivo-de-esta-carpeta">Objetivo de esta carpeta</h2>
+<p>Esta carpeta reune manuales separados para entender como se implemento el sistema de vistas, autenticacion, sesion, permisos por rol y acciones permitidas.
+Cada documento incluye explicacion no tecnica, explicacion tecnica y ejemplos practicos.</p>
+<p>Cada manual tiene dos enfoques:</p>
+<ul>
+<li>Explicacion no tecnica: para operacion, jefaturas o personas de negocio.</li>
+<li>Explicacion tecnica: para desarrollo, QA y soporte.</li>
+</ul>
+<h2 id="mapa-de-manuales">Mapa de manuales</h2>
+<ol>
+<li>
+<p>01_VISTAS_Y_NAVEGACION.md</p>
+<ul>
+<li>Rutas, estructura de pantalla, menu lateral y visibilidad de vistas.</li>
+</ul>
+</li>
+<li>
+<p>02_AUTENTICACION_Y_SESION.md</p>
+<ul>
+<li>Login, token JWT, sesion local, expiracion y cierre de sesion.</li>
+</ul>
+</li>
+<li>
+<p>03_ROLES_Y_PERMISOS_RBAC.md</p>
+<ul>
+<li>Matriz de permisos por rol y restricciones de acciones.</li>
+</ul>
+</li>
+<li>
+<p>04_DASHBOARD_TRABAJADOR.md</p>
+<ul>
+<li>Dashboard personal del trabajador y logica de datos mostrados.</li>
+</ul>
+</li>
+<li>
+<p>05_GUARDADO_DE_TAREAS_Y_CHECKLIST.md</p>
+<ul>
+<li>Como se guardan cambios desde panel de detalle y fallback local.</li>
+</ul>
+</li>
+<li>
+<p>06_TIPOS_DE_TAREA_Y_REGLAS.md</p>
+<ul>
+<li>Reglas por tipo de tarea (Aseo, Mantencion, Repaso).</li>
+</ul>
+</li>
+<li>
+<p>07_PRUEBAS_Y_VALIDACION.md</p>
+<ul>
+<li>Casos de prueba funcionales y tecnicos para validar todo el flujo.</li>
+</ul>
+</li>
+<li>
+<p>08_MANUAL_DE_USUARIO.md</p>
+<ul>
+<li>Manual de uso diario con anexos separados por rol: ADMIN, SUPERVISOR y TRABAJADOR.</li>
+</ul>
+</li>
+<li>
+<p>09_IMPLEMENTACION_COMPLETA.md</p>
+<ul>
+<li>Documento tecnico integral con detalles end-to-end y ejemplos de codigo implementado: rutas, sesiones, permisos, graficos, tablas, notificaciones, guardado y fallback.</li>
+</ul>
+</li>
+<li>
+<p>10_UNION_COMPLETA.md (Este archivo)</p>
+</li>
+</ol>
+<ul>
+<li>Union de todos los manuales (00 al 09) sin cambios en sus contenidos.</li>
+</ul>
+<h2 id="orden-recomendado-de-lectura">Orden recomendado de lectura</h2>
+<ol>
+<li>Primero 01 y 02 para entender flujo base de la aplicacion.</li>
+<li>Luego 03 para comprender permisos y limites por rol.</li>
+<li>Despues 04, 05 y 06 para operacion diaria y reglas de negocio.</li>
+<li>Finalmente 07 para pruebas, QA y soporte.</li>
+</ol>
+<h2 id="nota-importante">Nota importante</h2>
+<p>Estos manuales describen el estado actual de implementacion del frontend. Si se modifican permisos, rutas o contratos de API, se recomienda actualizar estos documentos en la misma tarea de desarrollo.</p>
+<hr>
+<h1 id="manual-01---vistas-y-navegacion">MANUAL 01 - Vistas y Navegacion</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica">1) Explicacion no tecnica</h2>
+<h3 id="que-problema-resuelve">Que problema resuelve</h3>
+<p>Evita dos problemas operativos comunes:</p>
+<ul>
+<li>Que un usuario vea pantallas que no le sirven (ruido y confusion).</li>
+<li>Que un usuario sin permiso intente hacer acciones que no debe.</li>
+</ul>
+<h3 id="como-funciona-en-simple">Como funciona en simple</h3>
+<p>La aplicacion tiene un &quot;portero&quot; de entrada y un &quot;menu inteligente&quot;:</p>
+<ul>
+<li>Portero: si no hay sesion valida, te manda a Login.</li>
+<li>Menu inteligente: muestra solo modulos permitidos por rol.</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-1">Ejemplo no tecnico 1</h3>
+<p>Escenario:</p>
+<ul>
+<li>Ana (TRABAJADOR) inicia sesion.</li>
+</ul>
+<p>Resultado esperado:</p>
+<ul>
+<li>Ve Inicio personal.</li>
+<li>Ve Tareas.</li>
+<li>Ve Kanban personal.</li>
+<li>No ve Usuarios ni Apartamentos.</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-2">Ejemplo no tecnico 2</h3>
+<p>Escenario:</p>
+<ul>
+<li>Carlos (SUPERVISOR) inicia sesion.</li>
+</ul>
+<p>Resultado esperado:</p>
+<ul>
+<li>Ve Dashboard general.</li>
+<li>Ve Usuarios (lectura), Tareas, Kanban y Apartamentos.</li>
+</ul>
+<h2 id="2-explicacion-tecnica">2) Explicacion tecnica</h2>
+<h3 id="archivos-clave">Archivos clave</h3>
+<ul>
+<li>src/App.jsx</li>
+<li>src/components/sidebar/Sidebar.jsx</li>
+<li>src/service/permissions.js</li>
+</ul>
+<h3 id="como-se-protege-la-navegacion">Como se protege la navegacion</h3>
+<p>En src/App.jsx se usan dos wrappers:</p>
+<ol>
+<li>RequireAuth</li>
+</ol>
+<ul>
+<li>Bloquea rutas privadas cuando no hay sesion valida.</li>
+</ul>
+<ol start="2">
+<li>RequireGuest</li>
+</ol>
+<ul>
+<li>Evita que un usuario ya autenticado vuelva a /login.</li>
+</ul>
+<h3 id="rutas-activas">Rutas activas</h3>
+<ul>
+<li>/login</li>
+<li>/</li>
+<li>/home</li>
+<li>/tasks</li>
+<li>/users</li>
+<li>/apartments</li>
+<li>/kanban</li>
+</ul>
+<h3 id="layout-compartido">Layout compartido</h3>
+<p>El Layout en src/App.jsx renderiza:</p>
+<ul>
+<li>Sidebar</li>
+<li>Header mobile</li>
+<li>Outlet con la vista actual</li>
+</ul>
+<p>Con esto, todas las vistas internas comparten el mismo marco de navegacion.</p>
+<h3 id="logica-del-menu">Logica del menu</h3>
+<p>En src/components/sidebar/Sidebar.jsx se evalua:</p>
+<ul>
+<li>canViewUsers()</li>
+<li>canViewApartments()</li>
+<li>canViewAnyTasks()</li>
+<li>canViewAnyKanban()</li>
+<li>canViewAdminDashboard()</li>
+</ul>
+<p>Con eso se define que items mostrar y como se etiqueta el primer item:</p>
+<ul>
+<li>Dashboard (admin/supervisor)</li>
+<li>Inicio (trabajador)</li>
+</ul>
+<h2 id="3-flujo-completo-paso-a-paso">3) Flujo completo (paso a paso)</h2>
+<ol>
+<li>Usuario abre la app.</li>
+<li>App valida token/sesion.</li>
+<li>Si no es valido, redirige a /login.</li>
+<li>Si es valido, entra al Layout.</li>
+<li>Sidebar consulta permisos y dibuja menu.</li>
+<li>Usuario navega a modulo permitido.</li>
+<li>La vista aplica filtros por permisos sobre los datos.</li>
+</ol>
+<h2 id="4-ejemplo-tecnico-guiado">4) Ejemplo tecnico guiado</h2>
+<h3 id="caso-usuario-no-autenticado-entra-a-tasks">Caso: usuario no autenticado entra a /tasks</h3>
+<p>Entrada:</p>
+<ul>
+<li>URL: /tasks</li>
+<li>Estado: sin token valido</li>
+</ul>
+<p>Salida:</p>
+<ul>
+<li>RequireAuth devuelve Navigate a /login.</li>
+</ul>
+<h3 id="caso-trabajador-autenticado">Caso: trabajador autenticado</h3>
+<p>Entrada:</p>
+<ul>
+<li>Rol detectado: TRABAJADOR</li>
+</ul>
+<p>Salida en Sidebar:</p>
+<ul>
+<li>Muestra Inicio, Tareas, Kanban.</li>
+<li>Oculta Usuarios y Apartamentos.</li>
+</ul>
+<h2 id="5-errores-comunes-y-como-detectarlos">5) Errores comunes y como detectarlos</h2>
+<ul>
+<li>
+<p>Error: aparece menu vacio</p>
+<ul>
+<li>Revisar getUserRole() y currentUser en localStorage.</li>
+</ul>
+</li>
+<li>
+<p>Error: usuario entra a vista no esperada</p>
+<ul>
+<li>Revisar helper de permisos usado en Sidebar.</li>
+</ul>
+</li>
+<li>
+<p>Error: ruta publica accidental</p>
+<ul>
+<li>Verificar que la ruta este dentro del bloque RequireAuth.</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-checklist-para-agregar-una-vista-nueva">6) Checklist para agregar una vista nueva</h2>
+<ol>
+<li>Crear ruta en src/App.jsx.</li>
+<li>Definir permiso en src/service/permissions.js.</li>
+<li>Agregar helper semantico (ejemplo: canViewReports).</li>
+<li>Mostrar item en Sidebar solo con ese helper.</li>
+<li>Aplicar filtro de datos por permisos dentro de la vista.</li>
+<li>Agregar caso de prueba por rol.</li>
+</ol>
+<hr>
+<h1 id="manual-02---autenticacion-y-sesion">MANUAL 02 - Autenticacion y Sesion</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-1">1) Explicacion no tecnica</h2>
+<h3 id="que-hace-esta-parte">Que hace esta parte</h3>
+<p>Resuelve 3 preguntas clave:</p>
+<ul>
+<li>Quien puede entrar.</li>
+<li>Cuanto tiempo permanece adentro.</li>
+<li>Que pasa cuando el acceso deja de ser valido.</li>
+</ul>
+<h3 id="flujo-simple-para-cualquier-persona">Flujo simple para cualquier persona</h3>
+<ol>
+<li>El usuario escribe correo y clave.</li>
+<li>El servidor responde si las credenciales son validas.</li>
+<li>Si son validas, la app guarda una &quot;llave temporal&quot; (token).</li>
+<li>Con esa llave se habilita la navegacion interna.</li>
+<li>Cuando la llave vence, la app cierra sesion automaticamente.</li>
+</ol>
+<h3 id="ejemplo-no-tecnico">Ejemplo no tecnico</h3>
+<p>Escenario:</p>
+<ul>
+<li>Sofia inicia sesion a las 09:00.</li>
+<li>A las 12:00 su token ya vencio.</li>
+<li>Al abrir una vista, la app detecta token vencido y la envia a Login.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li>No queda sesion &quot;fantasma&quot; abierta.</li>
+<li>Se evita que alguien use una sesion vieja.</li>
+</ul>
+<h2 id="2-explicacion-tecnica-1">2) Explicacion tecnica</h2>
+<h3 id="archivos-clave-1">Archivos clave</h3>
+<ul>
+<li>src/components/login/Login.jsx</li>
+<li>src/service/localStorage.js</li>
+<li>src/service/api.js</li>
+<li>src/App.jsx</li>
+</ul>
+<h3 id="flujo-tecnico-de-login">Flujo tecnico de Login</h3>
+<ol>
+<li>Login.jsx hace POST a /api/v1/auth/login.</li>
+<li>Espera respuesta con formato: { token, user }.</li>
+<li>setAuthToken(token) configura Authorization para llamadas futuras.</li>
+<li>setUserSession(user) normaliza campos y guarda currentUser.</li>
+<li>Se dispara evento authChanged para refrescar componentes.</li>
+<li>navigate() redirige a la ruta de destino.</li>
+</ol>
+<h3 id="ejemplo-tecnico-de-requestresponse">Ejemplo tecnico de request/response</h3>
+<p>Request:</p>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;trabajador@roomops.com&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;password&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;123456&quot;</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<p>Response esperada:</p>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;token&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;eyJhbGci...&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;user&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">17</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;trabajador@roomops.com&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;firstName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Sofia&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lastName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Diaz&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;role&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TRABAJADOR&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;activo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<h3 id="donde-se-guarda-la-sesion">Donde se guarda la sesion</h3>
+<p>En localStorage:</p>
+<ul>
+<li>token</li>
+<li>isLoggedIn</li>
+<li>currentUser</li>
+</ul>
+<p>currentUser queda normalizado para evitar diferencias entre frontend y backend.</p>
+<h3 id="validacion-de-expiracion">Validacion de expiracion</h3>
+<p>isTokenExpired(token):</p>
+<ul>
+<li>decodifica payload JWT</li>
+<li>lee claim exp</li>
+<li>compara con Date.now()</li>
+</ul>
+<p>isUserLoggedIn():</p>
+<ul>
+<li>valida flag de sesion</li>
+<li>valida token</li>
+<li>si no cumple, ejecuta clearUserSession()</li>
+</ul>
+<h3 id="fallback-de-robustez">Fallback de robustez</h3>
+<p>Si user llega incompleto en Login.jsx:</p>
+<ul>
+<li>se decodifican claims del token</li>
+<li>se arma sesion minima con id/email/role</li>
+</ul>
+<p>Esto evita que un 403 posterior en otro endpoint rompa la sesion inicial.</p>
+<h2 id="3-flujo-completo-con-ejemplos">3) Flujo completo con ejemplos</h2>
+<h3 id="caso-a---login-exitoso-normal">Caso A - Login exitoso normal</h3>
+<ol>
+<li>Usuario envia credenciales validas.</li>
+<li>API devuelve token + user.</li>
+<li>App guarda sesion.</li>
+<li>Sidebar muestra modulos por rol.</li>
+</ol>
+<h3 id="caso-b---token-vencido">Caso B - Token vencido</h3>
+<ol>
+<li>Usuario mantiene pestaña abierta.</li>
+<li>Token vence por tiempo.</li>
+<li>En siguiente chequeo, isUserLoggedIn devuelve false.</li>
+<li>App limpia sesion y redirige a /login.</li>
+</ol>
+<h3 id="caso-c---role-con-prefijo">Caso C - Role con prefijo</h3>
+<p>Si backend envia ROLE_SUPERVISOR:</p>
+<ul>
+<li>getUserRole normaliza a SUPERVISOR.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li>No falla la matriz de permisos por formato de string.</li>
+</ul>
+<h2 id="4-problemas-frecuentes-y-solucion">4) Problemas frecuentes y solucion</h2>
+<ul>
+<li>
+<p>Problema: usuario entra y no ve modulos</p>
+<ul>
+<li>Revisar campo role en currentUser.</li>
+<li>Revisar normalizacion en getUserRole.</li>
+</ul>
+</li>
+<li>
+<p>Problema: cierre de sesion inesperado</p>
+<ul>
+<li>Verificar exp del token.</li>
+<li>Verificar hora del sistema cliente.</li>
+</ul>
+</li>
+<li>
+<p>Problema: backend retorna 403 en consulta de usuario</p>
+<ul>
+<li>Mantener sesion con datos de login.</li>
+<li>Evitar depender de endpoint no permitido para completar sesion.</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-buenas-practicas-de-mantenimiento">5) Buenas practicas de mantenimiento</h2>
+<ol>
+<li>Mantener contrato de login estable: { token, user }.</li>
+<li>Normalizar rol siempre en un solo lugar.</li>
+<li>No duplicar logica de expiracion en muchos componentes.</li>
+<li>Al cambiar auth backend, actualizar este manual y tests.</li>
+</ol>
+<hr>
+<h1 id="manual-03---roles-y-permisos-rbac">MANUAL 03 - Roles y Permisos (RBAC)</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-2">1) Explicacion no tecnica</h2>
+<h3 id="que-es-rbac-en-este-proyecto">Que es RBAC en este proyecto</h3>
+<p>RBAC significa que cada rol entra a una &quot;version controlada&quot; de la app:</p>
+<ul>
+<li>ve solo lo que necesita</li>
+<li>hace solo lo que tiene permitido</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-1">Ejemplo no tecnico</h3>
+<p>Escenario:</p>
+<ul>
+<li>Un trabajador quiere eliminar un usuario.</li>
+</ul>
+<p>Resultado esperado:</p>
+<ul>
+<li>No ve la opcion y no puede ejecutar esa accion.</li>
+</ul>
+<p>Escenario:</p>
+<ul>
+<li>Un supervisor abre Usuarios.</li>
+</ul>
+<p>Resultado esperado:</p>
+<ul>
+<li>Puede revisar informacion, pero no tiene acciones administrativas completas.</li>
+</ul>
+<h2 id="2-explicacion-tecnica-2">2) Explicacion tecnica</h2>
+<h3 id="fuente-unica-de-verdad">Fuente unica de verdad</h3>
+<p>Archivo: src/service/permissions.js</p>
+<p>Este archivo define:</p>
+<ul>
+<li>ROLES</li>
+<li>PERMISSIONS</li>
+<li>rolePermissions (matriz rol -&gt; permisos)</li>
+<li>helpers de alto nivel (canViewUsers, canViewAnyTasks, etc)</li>
+</ul>
+<h3 id="matriz-resumida-por-rol">Matriz resumida por rol</h3>
+<p>ADMIN / ADMINISTRADOR:</p>
+<ul>
+<li>Gestion total de usuarios, apartamentos, tareas, dashboard y kanban.</li>
+</ul>
+<p>SUPERVISOR:</p>
+<ul>
+<li>Lectura de usuarios.</li>
+<li>Gestion operativa de tareas y checklist.</li>
+<li>Acceso a dashboard y kanban.</li>
+</ul>
+<p>TRABAJADOR:</p>
+<ul>
+<li>Tareas propias.</li>
+<li>Cambio de estado/checklist en tareas asignadas.</li>
+<li>Kanban personal.</li>
+</ul>
+<h3 id="helpers-clave">Helpers clave</h3>
+<ul>
+<li>hasPermission(permission)</li>
+<li>canViewAllTasks()</li>
+<li>canViewOwnTasks()</li>
+<li>canEditSpecificTask(task)</li>
+<li>filterTasksByPermissions(tasks)</li>
+<li>canViewAnyTasks()</li>
+<li>canViewAnyKanban()</li>
+</ul>
+<h2 id="3-ejemplos-tecnicos-concretos">3) Ejemplos tecnicos concretos</h2>
+<h3 id="ejemplo-a---filtro-de-tareas">Ejemplo A - Filtro de tareas</h3>
+<p>Entrada:</p>
+<ul>
+<li>Rol actual: TRABAJADOR</li>
+<li>tasks: 12 tareas mezcladas</li>
+</ul>
+<p>Proceso:</p>
+<ul>
+<li>filterTasksByPermissions(tasks)</li>
+<li>internamente usa isTaskOwner(task)</li>
+</ul>
+<p>Salida esperada:</p>
+<ul>
+<li>solo tareas asignadas al usuario autenticado</li>
+</ul>
+<h3 id="ejemplo-b---propietario-por-distintos-formatos">Ejemplo B - Propietario por distintos formatos</h3>
+<p>isTaskOwner(task) soporta:</p>
+<ul>
+<li>task.assignedUsers[]</li>
+<li>task.assignedUserId</li>
+<li>task.usuarioAsignadoId</li>
+<li>task.assignedUser.email</li>
+</ul>
+<p>Esto cubre variaciones de contratos backend.</p>
+<h3 id="ejemplo-c---menu-lateral">Ejemplo C - Menu lateral</h3>
+<p>Sidebar consulta canViewUsers().</p>
+<p>Si false:</p>
+<ul>
+<li>no renderiza link de Usuarios.</li>
+</ul>
+<p>Si true:</p>
+<ul>
+<li>renderiza link de Usuarios.</li>
+</ul>
+<h2 id="4-donde-impacta-rbac">4) Donde impacta RBAC</h2>
+<ul>
+<li>Navegacion: que links existen.</li>
+<li>Datos: que registros se ven.</li>
+<li>Acciones: que botones/operaciones aparecen.</li>
+<li>Dashboard: vista admin vs vista trabajador.</li>
+</ul>
+<h2 id="5-diferencia-entre-control-ui-y-seguridad-real">5) Diferencia entre control UI y seguridad real</h2>
+<p>Frontend RBAC:</p>
+<ul>
+<li>evita confusion y acciones no deseadas desde la interfaz.</li>
+</ul>
+<p>Backend seguridad:</p>
+<ul>
+<li>impide tecnicamente operaciones no autorizadas (aunque alguien intente llamar API directo).</li>
+</ul>
+<p>Ambas capas deben existir.</p>
+<h2 id="6-checklist-para-cambiar-permisos">6) Checklist para cambiar permisos</h2>
+<ol>
+<li>Modificar rolePermissions en permissions.js.</li>
+<li>Revisar helpers dependientes.</li>
+<li>Probar Sidebar con cada rol.</li>
+<li>Probar Task/Kanban/Home con cada rol.</li>
+<li>Verificar reglas equivalentes en backend.</li>
+</ol>
+<hr>
+<h1 id="manual-04---dashboard-del-trabajador">MANUAL 04 - Dashboard del Trabajador</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-3">1) Explicacion no tecnica</h2>
+<h3 id="objetivo">Objetivo</h3>
+<p>Mostrar al trabajador solo informacion accionable para su jornada.</p>
+<h3 id="que-incluye">Que incluye</h3>
+<ul>
+<li>Resumen rapido de carga diaria.</li>
+<li>Tarea mas urgente.</li>
+<li>Progreso del dia.</li>
+<li>Lista de tareas recientes.</li>
+<li>Accesos directos a modulos operativos.</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-2">Ejemplo no tecnico</h3>
+<p>Escenario de inicio de turno:</p>
+<ul>
+<li>Marta abre la app a las 08:00.</li>
+<li>Ve 3 pendientes, 1 en progreso, 0 hechas hoy.</li>
+<li>El panel le muestra como urgente una tarea Aseo con fecha de hoy.</li>
+</ul>
+<p>Resultado:</p>
+<ul>
+<li>Marta no necesita revisar listas largas.</li>
+<li>Sabe de inmediato por cual tarea comenzar.</li>
+</ul>
+<h2 id="2-explicacion-tecnica-3">2) Explicacion tecnica</h2>
+<h3 id="archivo-principal">Archivo principal</h3>
+<p>src/components/home/Home.jsx</p>
+<h3 id="decision-de-vista">Decision de vista</h3>
+<p>Home evalua canViewAdminDashboard():</p>
+<ul>
+<li>true -&gt; dashboard administrativo</li>
+<li>false -&gt; WorkerDashboard</li>
+</ul>
+<h3 id="dataset-base-de-workerdashboard">Dataset base de WorkerDashboard</h3>
+<p>Se cargan en paralelo:</p>
+<ul>
+<li>getTasks()</li>
+<li>getApartments()</li>
+<li>getStatuses()</li>
+</ul>
+<p>Luego:</p>
+<ul>
+<li>myTasks = filterTasksByPermissions(tasks)</li>
+</ul>
+<p>Con esto, el trabajador nunca consume una lista global en pantalla.</p>
+<h2 id="3-metricas-y-como-se-calculan">3) Metricas y como se calculan</h2>
+<h3 id="pendientes">Pendientes</h3>
+<p>Cuenta tareas cuyo estado normalizado es pending.</p>
+<h3 id="en-progreso">En progreso</h3>
+<p>Cuenta tareas cuyo estado normalizado es in-progress.</p>
+<h3 id="hechas-hoy">Hechas hoy</h3>
+<p>Cuenta tareas en done cuya fecha coincide con el dia actual.</p>
+<h3 id="progreso-diario">Progreso diario</h3>
+<p>Formula:</p>
+<pre class="hljs"><code><div>progressPercent = round((completedCount / totalMyTasks) * 100)
+</div></code></pre>
+<h3 id="tarea-urgente">Tarea urgente</h3>
+<p>Se busca entre pending + in-progress y se ordena por:</p>
+<ul>
+<li>fecha</li>
+<li>hora limite</li>
+</ul>
+<p>La primera del orden se muestra como &quot;Proxima tarea urgente&quot;.</p>
+<h2 id="4-ejemplo-tecnico-con-datos">4) Ejemplo tecnico con datos</h2>
+<p>Entrada filtrada del trabajador:</p>
+<pre class="hljs"><code><div><span class="hljs-punctuation">[</span>
+	<span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;titulo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Aseo apto 301&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;fecha&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-05-14&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;dueTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;16:00&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;statusId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+	<span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;titulo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Repaso apto 204&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;fecha&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-05-14&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;dueTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;16:00&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;statusId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+	<span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;titulo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Mantencion apto 101&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;fecha&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-05-13&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;dueTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;15:00&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;statusId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</div></code></pre>
+<p>Salida visual esperada:</p>
+<ul>
+<li>Pendientes: 1</li>
+<li>En progreso: 1</li>
+<li>Hechas hoy: 0</li>
+<li>Progreso: 33%</li>
+<li>Urgente: Aseo apto 301</li>
+</ul>
+<h2 id="5-interaccion-de-detalle">5) Interaccion de detalle</h2>
+<p>Al hacer click en tarea:</p>
+<ul>
+<li>se abre TaskDetailPanel</li>
+<li>se muestran apartamento, asignado, fecha, hora limite, checklist</li>
+</ul>
+<p>Los mapas apartmentNameById y statusNameById se pasan ya convertidos a texto para evitar errores de render.</p>
+<h2 id="6-ux-aplicada">6) UX aplicada</h2>
+<ul>
+<li>Loading state explicito: &quot;Cargando tus tareas...&quot;</li>
+<li>Badges de tipo/prioridad/estado</li>
+<li>Indicador ATRASADA cuando vence fecha+hora</li>
+<li>Accion clara: boton &quot;Ver detalle&quot;</li>
+</ul>
+<h2 id="7-mantenimiento-y-evolucion">7) Mantenimiento y evolucion</h2>
+<p>Si agregas una metrica nueva:</p>
+<ol>
+<li>Crear calculo con useMemo.</li>
+<li>Agregar tarjeta visual.</li>
+<li>Validar impacto en mobile.</li>
+<li>Probar con tareas vacias y con alto volumen.</li>
+</ol>
+<hr>
+<h1 id="manual-05---guardado-de-tareas-y-checklist">MANUAL 05 - Guardado de Tareas y Checklist</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-4">1) Explicacion no tecnica</h2>
+<h3 id="problema-original">Problema original</h3>
+<p>El trabajador podia marcar checklist en el panel de detalle, pero al pulsar Guardar no se persistia.</p>
+<h3 id="solucion-implementada">Solucion implementada</h3>
+<p>Se conecto el panel de detalle con un callback real de guardado.</p>
+<p>Comportamiento final:</p>
+<ul>
+<li>Si el servidor esta disponible, guarda en backend.</li>
+<li>Si el servidor falla, guarda en copia local para no perder trabajo.</li>
+<li>Al finalizar, recarga datos para reflejar estado real.</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-3">Ejemplo no tecnico</h3>
+<p>Escenario:</p>
+<ul>
+<li>Usuario marca 2 items como HECHO y 1 como BLOQUEADO con nota.</li>
+<li>Presiona Guardar.</li>
+</ul>
+<p>Resultado esperado:</p>
+<ul>
+<li>Ve mensaje de exito.</li>
+<li>Al reabrir la tarea, los cambios siguen presentes.</li>
+</ul>
+<h2 id="2-explicacion-tecnica-4">2) Explicacion tecnica</h2>
+<h3 id="archivos-involucrados">Archivos involucrados</h3>
+<ul>
+<li>src/components/home/Home.jsx</li>
+<li>src/components/taskDetail/TaskDetailPanel.jsx</li>
+<li>src/components/task/TaskFunctions.jsx</li>
+<li>src/service/taskService.js</li>
+</ul>
+<h3 id="contrato-entre-panel-y-dashboard">Contrato entre panel y dashboard</h3>
+<p>TaskDetailPanel llama:</p>
+<ul>
+<li>onSaveChecklist(task, sanitizedChecklist)</li>
+</ul>
+<p>Si no existe esa prop, el panel solo se cierra. Esta fue la causa original del bug.</p>
+<h3 id="como-quedo-en-workerdashboard">Como quedo en WorkerDashboard</h3>
+<p>Se implemento handleSaveTaskChecklist(task, checklistItems) y se paso al panel como:</p>
+<ul>
+<li>onSaveChecklist={handleSaveTaskChecklist}</li>
+</ul>
+<h2 id="3-flujo-tecnico-de-guardado">3) Flujo tecnico de guardado</h2>
+<ol>
+<li>TaskDetailPanel normaliza cada item:
+<ul>
+<li>descripcion</li>
+<li>estado (PENDIENTE/HECHO/BLOQUEADO)</li>
+<li>nota (solo cuando BLOQUEADO)</li>
+</ul>
+</li>
+<li>Llama callback con la tarea y checklist saneado.</li>
+<li>WorkerDashboard construye payload completo.</li>
+<li>Resuelve statusId global con resolveTaskStatusIdFromChecklist.</li>
+<li>Intenta updateTask(taskId, payload).</li>
+<li>Si falla API, intenta updateTaskLocal(taskId, payload).</li>
+<li>Muestra toast segun resultado.</li>
+<li>Ejecuta refreshWorkerData().</li>
+<li>Si todo bien, panel cierra.</li>
+</ol>
+<h2 id="4-ejemplo-tecnico-de-payload">4) Ejemplo tecnico de payload</h2>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;titulo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Aseo apto 301&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;descripcion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Aseo general&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;tipo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Aseo&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;prioridad&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MEDIA&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;fecha&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-05-14&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;dueTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;18:00&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;apartmentId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">301</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;assignedUserId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">17</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;statusId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;estadoId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;checklist&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;descripcion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Reponer toallas&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;estado&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HECHO&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;nota&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span> <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;descripcion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Revisar minibar&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;estado&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;BLOQUEADO&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;nota&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Falta stock&quot;</span> <span class="hljs-punctuation">}</span>
+   <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<h2 id="5-reglas-de-resiliencia">5) Reglas de resiliencia</h2>
+<p>Prioridad de persistencia:</p>
+<ol>
+<li>Backend (fuente principal)</li>
+<li>LocalStorage (fallback de continuidad)</li>
+</ol>
+<p>Notificaciones:</p>
+<ul>
+<li>Exito: Checklist actualizado</li>
+<li>Fallback activado: aviso de copia local por falla del servidor</li>
+<li>Error final: mensaje tecnico de falla</li>
+</ul>
+<h2 id="6-casos-de-prueba-recomendados">6) Casos de prueba recomendados</h2>
+<ol>
+<li>Guardado exitoso con backend en linea.</li>
+<li>Guardado con backend caido (validar fallback local).</li>
+<li>Checklist vacio (no debe romper).</li>
+<li>Item bloqueado sin nota (verificar validacion esperada de negocio).</li>
+<li>Reapertura inmediata de tarea para confirmar persistencia.</li>
+</ol>
+<hr>
+<h1 id="manual-06---tipos-de-tarea-y-reglas-de-negocio">MANUAL 06 - Tipos de Tarea y Reglas de Negocio</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-5">1) Explicacion no tecnica</h2>
+<h3 id="para-que-sirve">Para que sirve</h3>
+<p>Estandariza la operacion para que el equipo no decida prioridad y urgencia de forma distinta cada dia.</p>
+<h3 id="reglas-actuales">Reglas actuales</h3>
+<ul>
+<li>Mantencion: prioridad ALTA.</li>
+<li>Aseo: prioridad MEDIA y hora limite definida por flujo de trabajo.</li>
+<li>Repaso: prioridad BAJA y hora limite 16:00.</li>
+</ul>
+<h3 id="ejemplo-no-tecnico-4">Ejemplo no tecnico</h3>
+<p>Si se crean dos tareas el mismo dia:</p>
+<ul>
+<li>&quot;Fuga de agua&quot; (Mantencion)</li>
+<li>&quot;Repaso final&quot; (Repaso)</li>
+</ul>
+<p>La primera debe aparecer con mayor urgencia para ejecucion.</p>
+<h2 id="2-explicacion-tecnica-5">2) Explicacion tecnica</h2>
+<h3 id="archivo-de-reglas-base">Archivo de reglas base</h3>
+<p>src/components/task/TaskFunctions.jsx</p>
+<p>Funcion central:</p>
+<ul>
+<li>getPriorityByType(type)</li>
+</ul>
+<p>Mapeo:</p>
+<ul>
+<li>mantencion -&gt; ALTA</li>
+<li>aseo -&gt; MEDIA</li>
+<li>repaso -&gt; BAJA</li>
+</ul>
+<h3 id="archivo-de-presentacionurgencia">Archivo de presentacion/urgencia</h3>
+<p>src/components/home/Home.jsx</p>
+<p>Funciones:</p>
+<ul>
+<li>getTaskTypeLabel(task)</li>
+<li>getTaskDeadlineTime(task)</li>
+<li>getTaskPriorityKey(task)</li>
+<li>isTaskOverdue(task, statusById)</li>
+</ul>
+<p>Estas funciones afectan:</p>
+<ul>
+<li>badge mostrado</li>
+<li>orden de tarea urgente</li>
+<li>indicador ATRASADA</li>
+</ul>
+<h2 id="3-ejemplo-tecnico-guiado">3) Ejemplo tecnico guiado</h2>
+<p>Entrada:</p>
+<pre class="hljs"><code><div><span class="hljs-punctuation">{</span>
+	<span class="hljs-attr">&quot;tipo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Repaso&quot;</span><span class="hljs-punctuation">,</span>
+	<span class="hljs-attr">&quot;fecha&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2026-05-14&quot;</span>
+<span class="hljs-punctuation">}</span>
+</div></code></pre>
+<p>Resolucion esperada:</p>
+<ul>
+<li>prioridad calculada: BAJA</li>
+<li>dueTime sugerido para repaso: 16:00</li>
+</ul>
+<p>Salida visual:</p>
+<ul>
+<li>badge de prioridad BAJA</li>
+<li>hora limite visible en tarjeta/panel</li>
+</ul>
+<h2 id="4-dato-importante-de-consistencia">4) Dato importante de consistencia</h2>
+<p>Actualmente hay reglas en frontend para mostrar y ordenar.
+Para consistencia completa entre clientes (web, mobile, integraciones), la recomendacion es validar tambien en backend:</p>
+<ul>
+<li>tipo valido</li>
+<li>prioridad coherente</li>
+<li>hora limite por tipo</li>
+</ul>
+<h2 id="5-guia-para-agregar-un-nuevo-tipo">5) Guia para agregar un nuevo tipo</h2>
+<p>Supongamos nuevo tipo: &quot;Inspeccion&quot;.</p>
+<p>Pasos:</p>
+<ol>
+<li>Agregar opcion en formularios de creacion y edicion.</li>
+<li>Definir prioridad en getPriorityByType.</li>
+<li>Definir hora limite en getTaskDeadlineTime.</li>
+<li>Verificar labels en getTaskTypeLabel/getTaskPriorityKey.</li>
+<li>Probar filtro, badges y orden de urgencia.</li>
+<li>Documentar regla en este manual.</li>
+</ol>
+<h2 id="6-casos-de-prueba-minimos">6) Casos de prueba minimos</h2>
+<ol>
+<li>Crear tarea de cada tipo y validar prioridad asignada.</li>
+<li>Validar hora limite renderizada por tipo.</li>
+<li>Confirmar que tarea con hora vencida marque ATRASADA.</li>
+<li>Confirmar que tipo nuevo no rompe filtros ni formularios.</li>
+</ol>
+<hr>
+<h1 id="manual-07---pruebas-y-validacion">MANUAL 07 - Pruebas y Validacion</h1>
+<p>Version: 1.1</p>
+<h2 id="1-explicacion-no-tecnica-6">1) Explicacion no tecnica</h2>
+<h3 id="objetivo-1">Objetivo</h3>
+<p>Comprobar que el sistema se comporta correctamente para cada rol y en condiciones reales de uso.</p>
+<h3 id="que-valida-este-plan">Que valida este plan</h3>
+<ul>
+<li>Acceso correcto por perfil.</li>
+<li>Limites de acciones por rol.</li>
+<li>Guardado de checklist desde dashboard trabajador.</li>
+<li>Consistencia de reglas por tipo de tarea.</li>
+</ul>
+<h2 id="2-matriz-funcional-esperada">2) Matriz funcional esperada</h2>
+<h3 id="admin">ADMIN</h3>
+<p>Debe poder:</p>
+<ul>
+<li>Ver dashboard general.</li>
+<li>Gestionar usuarios.</li>
+<li>Gestionar apartamentos.</li>
+<li>Gestionar todas las tareas.</li>
+</ul>
+<h3 id="supervisor">SUPERVISOR</h3>
+<p>Debe poder:</p>
+<ul>
+<li>Ver dashboard general.</li>
+<li>Ver usuarios en lectura.</li>
+<li>Operar tareas y kanban.</li>
+</ul>
+<h3 id="trabajador">TRABAJADOR</h3>
+<p>Debe poder:</p>
+<ul>
+<li>Ver dashboard personal.</li>
+<li>Ver solo tareas propias.</li>
+<li>Guardar checklist en detalle.</li>
+<li>Ver kanban personal.</li>
+</ul>
+<p>No debe poder:</p>
+<ul>
+<li>Administrar usuarios.</li>
+<li>Ver dashboard administrativo.</li>
+</ul>
+<h2 id="3-casos-de-prueba-con-detalle">3) Casos de prueba con detalle</h2>
+<h3 id="caso-a---login-y-sesion">Caso A - Login y sesion</h3>
+<p>Pasos:</p>
+<ol>
+<li>Ir a /login.</li>
+<li>Ingresar credenciales validas.</li>
+<li>Confirmar redireccion.</li>
+<li>Abrir menu y verificar modulos segun rol.</li>
+</ol>
+<p>Criterio de aceptacion:</p>
+<ul>
+<li>Sesion activa.</li>
+<li>Menu correcto.</li>
+</ul>
+<p>Evidencia sugerida:</p>
+<ul>
+<li>captura de menu por rol.</li>
+</ul>
+<h3 id="caso-b---sesion-expirada">Caso B - Sesion expirada</h3>
+<p>Pasos:</p>
+<ol>
+<li>Simular token vencido en localStorage.</li>
+<li>Refrescar pagina.</li>
+</ol>
+<p>Criterio de aceptacion:</p>
+<ul>
+<li>Redireccion a /login.</li>
+<li>Sesion limpia.</li>
+</ul>
+<h3 id="caso-c---trabajador-guarda-checklist">Caso C - Trabajador guarda checklist</h3>
+<p>Pasos:</p>
+<ol>
+<li>Login con trabajador.</li>
+<li>Abrir Home personal.</li>
+<li>Entrar a detalle de tarea.</li>
+<li>Marcar 1 item HECHO y 1 BLOQUEADO con nota.</li>
+<li>Guardar cambios.</li>
+<li>Reabrir detalle.</li>
+</ol>
+<p>Criterio de aceptacion:</p>
+<ul>
+<li>Cambios persistidos.</li>
+<li>Estado de tarea coherente con checklist.</li>
+</ul>
+<h3 id="caso-d---filtro-por-propietario">Caso D - Filtro por propietario</h3>
+<p>Pasos:</p>
+<ol>
+<li>Preparar tareas de 2 usuarios.</li>
+<li>Login como trabajador A.</li>
+<li>Revisar lista en Home/Tasks/Kanban.</li>
+</ol>
+<p>Criterio de aceptacion:</p>
+<ul>
+<li>Solo aparecen tareas del trabajador A.</li>
+</ul>
+<h3 id="caso-e---reglas-por-tipo">Caso E - Reglas por tipo</h3>
+<p>Pasos:</p>
+<ol>
+<li>Crear/editar tarea tipo Repaso.</li>
+<li>Verificar prioridad y hora limite.</li>
+</ol>
+<p>Criterio de aceptacion:</p>
+<ul>
+<li>Se aplica BAJA y deadline esperado para Repaso.</li>
+</ul>
+<h2 id="4-validacion-tecnica-minima">4) Validacion tecnica minima</h2>
+<p>Revisar errores en:</p>
+<ul>
+<li>src/components/home/Home.jsx</li>
+<li>src/service/permissions.js</li>
+<li>src/components/taskDetail/TaskDetailPanel.jsx</li>
+</ul>
+<p>Revisar red en guardado checklist:</p>
+<ul>
+<li>Debe existir llamada PUT updateTask.</li>
+<li>Si falla API, debe haber fallback local y notificacion.</li>
+</ul>
+<h2 id="5-criterios-de-salida-definition-of-done">5) Criterios de salida (Definition of Done)</h2>
+<p>Se considera validado cuando:</p>
+<ol>
+<li>Todos los casos A-E pasan en ambiente de prueba.</li>
+<li>No hay errores de compilacion en archivos criticos.</li>
+<li>No hay fugas de permisos entre roles.</li>
+<li>Guardado de checklist funciona en backend y fallback local.</li>
+</ol>
+<h2 id="6-guia-rapida-de-diagnostico">6) Guia rapida de diagnostico</h2>
+<p>Sintoma: menu vacio</p>
+<ul>
+<li>Revisar role normalizado en currentUser.</li>
+</ul>
+<p>Sintoma: trabajador ve tareas ajenas</p>
+<ul>
+<li>Revisar isTaskOwner y campos de asignacion del backend.</li>
+</ul>
+<p>Sintoma: guardar no persiste</p>
+<ul>
+<li>Revisar onSaveChecklist conectado en Home.</li>
+<li>Revisar respuesta de updateTask.</li>
+<li>Revisar updateTaskLocal si API fallo.</li>
+</ul>
+<hr>
+<h1 id="manual-08---manual-de-usuario-roomops-front">MANUAL 08 - Manual de Usuario RoomOps Front</h1>
+<p><em>(Contenido muy largo - Se incluye el manual de usuario granular que fue creado anteriormente)</em></p>
+<h1 id="manual-de-usuario---roomops-front-guía-específica-por-rol">Manual de Usuario - RoomOps Front (Guía Específica por Rol)</h1>
+<p><strong>Versión:</strong> 2.0 (Granular)<br>
+<strong>Fecha:</strong> 2026-05-14<br>
+<strong>Público:</strong> Usuarios finales (ADMIN, SUPERVISOR, TRABAJADOR) y equipo de soporte<br>
+<strong>Descripción:</strong> Este manual es extremadamente específico. Cada acción incluye pasos numerados, nombres exactos de botones, campos de formulario, lo que verás en pantalla, y mensajes de notificación esperados.</p>
+<h2 id="sección-común---acceso-al-sistema">SECCIÓN COMÚN - Acceso al Sistema</h2>
+<h3 id="11--iniciar-sesión-para-todos-los-roles">1.1 | INICIAR SESIÓN (Para todos los roles)</h3>
+<p><strong>Ubicación:</strong> Pantalla de login<br>
+<strong>Duración:</strong> 2-3 minutos</p>
+<h4 id="pasos-exactos">Pasos exactos:</h4>
+<ol>
+<li><strong>Abre tu navegador</strong> (Chrome, Edge, Firefox recomendado)</li>
+<li><strong>Escribe la URL</strong> de la aplicación en la barra de direcciones</li>
+<li><strong>Espera a que cargue</strong> la pantalla de login (verás el logo de RoomOps y dos campos de texto)</li>
+<li><strong>Haz clic en el campo de correo</strong> (primer campo de texto gris)</li>
+<li><strong>Escribe tu correo de usuario</strong> (ej: juan@roomops.com)</li>
+<li><strong>Haz clic en el campo de contraseña</strong> (segundo campo de texto gris, bajo el correo)</li>
+<li><strong>Escribe tu contraseña</strong> (verás puntos en lugar de caracteres)</li>
+<li><strong>Haz clic en el botón azul &quot;Iniciar sesión&quot;</strong> (botón grande en la parte inferior)</li>
+<li><strong>Espera de 1-2 segundos</strong></li>
+</ol>
+<p>[Nota: Para ver el contenido completo del Manual 08, consulte el archivo original 08_MANUAL_DE_USUARIO.md que contiene todas las acciones específicas por rol con pasos detallados, ejemplos visuales, problemas comunes y buenas prácticas]</p>
+<hr>
+<h1 id="manual-09---implementacion-completa-end-to-end">MANUAL 09 - Implementacion Completa (End-to-End)</h1>
+<p>Version: 1.0
+Fecha: 2026-05-14
+Audiencia: tecnica y no tecnica</p>
+<h2 id="1-proposito">1. Proposito</h2>
+<p>Este documento consolida como se implemento la aplicacion frontend de RoomOps, cubriendo en una sola lectura:</p>
+<ul>
+<li>arquitectura de vistas</li>
+<li>autenticacion y sesion</li>
+<li>permisos por rol (RBAC)</li>
+<li>tablas y listados</li>
+<li>graficos y metricas</li>
+<li>notificaciones</li>
+<li>guardado de checklist y fallback local</li>
+<li>flujo de datos con backend</li>
+</ul>
+<p>Tambien incluye ejemplos reales de codigo y escenarios de uso.</p>
+<hr>
+<h2 id="2-vista-general-de-arquitectura">2. Vista general de arquitectura</h2>
+<h3 id="21-estructura-funcional">2.1 Estructura funcional</h3>
+<ul>
+<li>Enrutamiento y layout compartido: src/App.jsx</li>
+<li>Login y sesion: src/components/login/Login.jsx + src/service/localStorage.js</li>
+<li>Permisos por rol: src/service/permissions.js</li>
+<li>Dashboard y metricas: src/components/home/Home.jsx</li>
+<li>Tablas de gestion (usuarios/tareas): src/components/users/Users.jsx, src/components/task/Task.jsx</li>
+<li>Detalle y checklist: src/components/taskDetail/TaskDetailPanel.jsx</li>
+<li>Servicios API: src/service/*.js</li>
+<li>Notificaciones toast: src/utils/toast.js</li>
+</ul>
+<h3 id="22-flujo-maestro-simplificado">2.2 Flujo maestro simplificado</h3>
+<ol>
+<li>Usuario inicia sesion.</li>
+<li>Se guarda token + usuario normalizado.</li>
+<li>Router habilita rutas privadas.</li>
+<li>Sidebar y vistas preguntan permisos.</li>
+<li>Se cargan datos desde backend (o fallback local si falla).</li>
+<li>Usuario ejecuta acciones (crear/editar/guardar checklist).</li>
+<li>Se notifica resultado en pantalla.</li>
+</ol>
+<hr>
+<h2 id="3-enrutamiento-y-control-de-acceso">3. Enrutamiento y control de acceso</h2>
+<p>Archivo: src/App.jsx</p>
+<h3 id="31-rutas-protegidas">3.1 Rutas protegidas</h3>
+<p>Se implementan dos wrappers:</p>
+<ul>
+<li>RequireAuth: bloquea acceso si no hay sesion valida.</li>
+<li>RequireGuest: evita que un usuario logueado vuelva a /login.</li>
+</ul>
+<p>Ejemplo implementado:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">function</span> <span class="hljs-title function_">RequireAuth</span>(<span class="hljs-params">{ children }</span>) {
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title function_">isUserLoggedIn</span>()) {
+    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Navigate</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/login&quot;</span> <span class="hljs-attr">replace</span> /&gt;</span></span>
+  }
+
+  <span class="hljs-keyword">return</span> children
+}
+</div></code></pre>
+<h3 id="32-rutas-activas">3.2 Rutas activas</h3>
+<ul>
+<li>/login</li>
+<li>/</li>
+<li>/home</li>
+<li>/tasks</li>
+<li>/users</li>
+<li>/apartments</li>
+<li>/kanban</li>
+</ul>
+<h3 id="33-layout-comun">3.3 Layout comun</h3>
+<p>El layout comparte Sidebar + contenido (Outlet), y adapta modo desktop/mobile.</p>
+<p>Beneficio:</p>
+<ul>
+<li>consistencia visual</li>
+<li>control centralizado de navegacion</li>
+</ul>
+<hr>
+<h2 id="4-autenticacion-y-sesion">4. Autenticacion y sesion</h2>
+<p>Archivos:</p>
+<ul>
+<li>src/components/login/Login.jsx</li>
+<li>src/service/localStorage.js</li>
+</ul>
+<h3 id="41-login-con-backend">4.1 Login con backend</h3>
+<p>Flujo real:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> resp = <span class="hljs-keyword">await</span> api.<span class="hljs-title function_">post</span>(<span class="hljs-string">&#x27;/api/v1/auth/login&#x27;</span>, { email, password });
+<span class="hljs-keyword">const</span> data = resp.<span class="hljs-property">data</span> || {};
+<span class="hljs-keyword">const</span> token = data.<span class="hljs-property">token</span>;
+<span class="hljs-keyword">const</span> userData = data.<span class="hljs-property">user</span> || {};
+
+<span class="hljs-title function_">setAuthToken</span>(token);
+<span class="hljs-title function_">setUserSession</span>(userData);
+</div></code></pre>
+<h3 id="42-fallback-por-claims-jwt">4.2 Fallback por claims JWT</h3>
+<p>Si userData llega incompleto, se decodifica JWT para completar sesion minima:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> claims = <span class="hljs-title function_">decodeJwtPayload</span>(token) || {};
+<span class="hljs-keyword">const</span> sessionFromToken = {
+  <span class="hljs-attr">id</span>: userData.<span class="hljs-property">id</span> || claims.<span class="hljs-property">userId</span> || claims.<span class="hljs-property">id</span> || claims.<span class="hljs-property">uid</span> || <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">email</span>: userData.<span class="hljs-property">email</span> || claims.<span class="hljs-property">email</span> || claims.<span class="hljs-property">sub</span> || email,
+  <span class="hljs-attr">role</span>: userData.<span class="hljs-property">role</span> || <span class="hljs-title function_">resolveRoleFromClaims</span>(claims)
+};
+<span class="hljs-title function_">setUserSession</span>(sessionFromToken);
+</div></code></pre>
+<h3 id="43-persistencia-de-sesion">4.3 Persistencia de sesion</h3>
+<p>Se usan claves en localStorage:</p>
+<ul>
+<li>token</li>
+<li>isLoggedIn</li>
+<li>currentUser</li>
+</ul>
+<h3 id="44-expiracion-de-token">4.4 Expiracion de token</h3>
+<p>Implementacion clave:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">isTokenExpired</span> = (<span class="hljs-params">token = <span class="hljs-variable language_">localStorage</span>.getItem(TOKEN_KEY)</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (!token) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  <span class="hljs-keyword">const</span> payload = <span class="hljs-title function_">decodeJwtPayload</span>(token);
+  <span class="hljs-keyword">if</span> (!payload || <span class="hljs-keyword">typeof</span> payload.<span class="hljs-property">exp</span> !== <span class="hljs-string">&#x27;number&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>() &gt;= payload.<span class="hljs-property">exp</span> * <span class="hljs-number">1000</span>;
+};
+</div></code></pre>
+<p>Si vence, se limpia sesion automaticamente.</p>
+<hr>
+<h2 id="5-rbac-roles-y-limitacion-de-acciones">5. RBAC: roles y limitacion de acciones</h2>
+<p>Archivo: src/service/permissions.js</p>
+<h3 id="51-roles-del-sistema">5.1 Roles del sistema</h3>
+<ul>
+<li>ADMIN / ADMINISTRADOR</li>
+<li>SUPERVISOR</li>
+<li>TRABAJADOR</li>
+</ul>
+<h3 id="52-matriz-de-permisos">5.2 Matriz de permisos</h3>
+<p>La matriz rolePermissions define de forma centralizada que puede hacer cada rol.</p>
+<p>Ejemplo real:</p>
+<pre class="hljs"><code><div>[<span class="hljs-variable constant_">ROLES</span>.<span class="hljs-property">TRABAJADOR</span>]: [
+  <span class="hljs-variable constant_">PERMISSIONS</span>.<span class="hljs-property">VIEW_OWN_TASKS</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span>.<span class="hljs-property">CHANGE_TASK_STATUS</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span>.<span class="hljs-property">VIEW_CHECKLIST</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span>.<span class="hljs-property">EDIT_CHECKLIST</span>,
+  <span class="hljs-variable constant_">PERMISSIONS</span>.<span class="hljs-property">VIEW_PERSONAL_KANBAN</span>
+]
+</div></code></pre>
+<h3 id="53-helpers-de-autorizacion">5.3 Helpers de autorizacion</h3>
+<ul>
+<li>canViewUsers</li>
+<li>canViewApartments</li>
+<li>canViewAllTasks</li>
+<li>canViewOwnTasks</li>
+<li>canViewAnyTasks</li>
+<li>canViewAnyKanban</li>
+<li>canViewAdminDashboard</li>
+</ul>
+<h3 id="54-filtro-de-datos-por-rol">5.4 Filtro de datos por rol</h3>
+<p>La funcion filterTasksByPermissions aplica restricciones sobre la data:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">filterTasksByPermissions</span> = (<span class="hljs-params">tasks</span>) =&gt; {
+  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">canViewAllTasks</span>()) <span class="hljs-keyword">return</span> tasks;
+  <span class="hljs-keyword">if</span> (<span class="hljs-title function_">canViewOwnTasks</span>()) <span class="hljs-keyword">return</span> tasks.<span class="hljs-title function_">filter</span>(<span class="hljs-function"><span class="hljs-params">task</span> =&gt;</span> <span class="hljs-title function_">isTaskOwner</span>(task));
+  <span class="hljs-keyword">return</span> [];
+}
+</div></code></pre>
+<hr>
+<h2 id="6-vistas-dashboard-tablas-y-listados">6. Vistas: Dashboard, tablas y listados</h2>
+<h2 id="61-dashboard-administrativo-y-trabajador">6.1 Dashboard administrativo y trabajador</h2>
+<p>Archivo: src/components/home/Home.jsx</p>
+<p>Decision de vista:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> hasAdminDashboard = <span class="hljs-title function_">canViewAdminDashboard</span>();
+<span class="hljs-keyword">if</span> (!hasAdminDashboard) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">WorkerDashboard</span> /&gt;</span></span>;
+}
+</div></code></pre>
+<p>Resultado:</p>
+<ul>
+<li>ADMIN/SUPERVISOR: dashboard global.</li>
+<li>TRABAJADOR: dashboard personal.</li>
+</ul>
+<h3 id="62-graficos-y-metricas">6.2 Graficos y metricas</h3>
+<p>En Home se calculan metricas y datos de grafico:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> statusSummary = <span class="hljs-title function_">useMemo</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> summary = { <span class="hljs-attr">pending</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;in-progress&#x27;</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">done</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">blocked</span>: <span class="hljs-number">0</span> };
+  visibleTasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> key = <span class="hljs-title function_">getTaskStatusKey</span>(task, statusById);
+    summary[key] = (summary[key] || <span class="hljs-number">0</span>) + <span class="hljs-number">1</span>;
+  });
+  <span class="hljs-keyword">return</span> summary;
+}, [statusById, visibleTasks]);
+
+<span class="hljs-keyword">const</span> chartData = <span class="hljs-title function_">useMemo</span>(
+  <span class="hljs-function">() =&gt;</span> <span class="hljs-variable constant_">STATUS_ORDER</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">key</span>) =&gt;</span> ({ key, <span class="hljs-attr">count</span>: statusSummary[key] || <span class="hljs-number">0</span>, ...<span class="hljs-variable constant_">STATUS_META</span>[key] })),
+  [statusSummary]
+);
+</div></code></pre>
+<p>Se renderiza un grafico de barras en la UI con esos datos.</p>
+<h3 id="63-tablas-ejemplo-users">6.3 Tablas (ejemplo Users)</h3>
+<p>Archivo: src/components/users/Users.jsx</p>
+<p>Users usa componentes de tabla y filtros:</p>
+<ul>
+<li>CTable</li>
+<li>CTableHead / CTableBody</li>
+<li>CFormInput para busqueda</li>
+<li>filtros por rol/estado</li>
+</ul>
+<p>Ejemplo de acceso protegido por permisos:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> isLoggedIn = <span class="hljs-title function_">isUserLoggedIn</span>();
+<span class="hljs-keyword">const</span> canAccess = <span class="hljs-title function_">canViewUsers</span>();
+
+<span class="hljs-keyword">if</span> (!isLoggedIn) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Navigate</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/login?redirect=/users&quot;</span> <span class="hljs-attr">replace</span> /&gt;</span></span>;
+<span class="hljs-keyword">if</span> (!canAccess) <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Navigate</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;/&quot;</span> <span class="hljs-attr">replace</span> /&gt;</span></span>;
+</div></code></pre>
+<h3 id="64-listados-y-filtros-ejemplo-tasks">6.4 Listados y filtros (ejemplo Tasks)</h3>
+<p>Archivo: src/components/task/Task.jsx</p>
+<p>Task implementa:</p>
+<ul>
+<li>filtros por apartamento, estado, tipo, asignado, fecha</li>
+<li>busqueda normalizada (sin acentos)</li>
+<li>reglas de acceso por canViewAllTasks/canViewOwnTasks</li>
+</ul>
+<hr>
+<h2 id="7-notificaciones-y-feedback-de-usuario">7. Notificaciones y feedback de usuario</h2>
+<p>Archivo: src/utils/toast.js</p>
+<p>Se implementan toasts estandarizados:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">showSuccessToast</span> = (<span class="hljs-params">message</span>) =&gt; {
+  toast.<span class="hljs-title function_">success</span>(message, {
+    <span class="hljs-attr">position</span>: <span class="hljs-string">&#x27;top-right&#x27;</span>,
+    <span class="hljs-attr">autoClose</span>: <span class="hljs-number">1000</span>,
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">&#x27;light&#x27;</span>,
+  })
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">showErrorToast</span> = (<span class="hljs-params">message</span>) =&gt; {
+  toast.<span class="hljs-title function_">error</span>(message, {
+    <span class="hljs-attr">position</span>: <span class="hljs-string">&#x27;top-right&#x27;</span>,
+    <span class="hljs-attr">autoClose</span>: <span class="hljs-number">3000</span>,
+    <span class="hljs-attr">theme</span>: <span class="hljs-string">&#x27;colored&#x27;</span>,
+  })
+}
+</div></code></pre>
+<p>Uso real en flujos:</p>
+<ul>
+<li>Login exitoso o fallido</li>
+<li>Creacion/edicion/eliminacion</li>
+<li>Guardado de checklist</li>
+<li>aviso de fallback local cuando falla backend</li>
+</ul>
+<hr>
+<h2 id="8-guardado-de-checklist-y-resiliencia">8. Guardado de checklist y resiliencia</h2>
+<p>Archivos:</p>
+<ul>
+<li>src/components/taskDetail/TaskDetailPanel.jsx</li>
+<li>src/components/home/Home.jsx</li>
+<li>src/components/task/TaskFunctions.jsx</li>
+</ul>
+<h3 id="81-contrato-del-panel-de-detalle">8.1 Contrato del panel de detalle</h3>
+<p>TaskDetailPanel arma checklist saneado y llama callback:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> sanitizedChecklist = editableChecklist.<span class="hljs-title function_">map</span>(normalizeChecklistItemForSave)
+<span class="hljs-keyword">const</span> saved = <span class="hljs-keyword">await</span> <span class="hljs-title function_">onSaveChecklist</span>(task, sanitizedChecklist)
+<span class="hljs-keyword">if</span> (saved !== <span class="hljs-literal">false</span>) <span class="hljs-title function_">onClose</span>()
+</div></code></pre>
+<h3 id="82-guardado-real-en-workerdashboard">8.2 Guardado real en WorkerDashboard</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleSaveTaskChecklist</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">task, checklistItems = []</span>) =&gt; {
+  <span class="hljs-keyword">const</span> nextStatusId = <span class="hljs-title function_">resolveTaskStatusIdFromChecklist</span>(statuses, checklistItems, <span class="hljs-title function_">getTaskStatusId</span>(task));
+  <span class="hljs-keyword">const</span> payload = { ...campos, <span class="hljs-attr">statusId</span>: nextStatusId, <span class="hljs-attr">checklist</span>: checklistItems };
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">updateTask</span>(taskId, payload);
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">const</span> localResult = <span class="hljs-title function_">updateTaskLocal</span>(taskId, payload);
+    <span class="hljs-keyword">if</span> (!localResult?.<span class="hljs-property">success</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;No se pudo actualizar el checklist en localStorage&#x27;</span>);
+    <span class="hljs-title function_">showErrorToast</span>(<span class="hljs-string">&#x27;Se uso copia local por falla del servidor&#x27;</span>);
+  }
+
+  <span class="hljs-title function_">showSuccessToast</span>(<span class="hljs-string">&#x27;Checklist actualizado&#x27;</span>);
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">refreshWorkerData</span>();
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+}
+</div></code></pre>
+<h3 id="83-beneficio-de-la-estrategia">8.3 Beneficio de la estrategia</h3>
+<ul>
+<li>No se pierde trabajo del usuario por una falla puntual de red/backend.</li>
+<li>El usuario recibe feedback inmediato del resultado.</li>
+</ul>
+<hr>
+<h2 id="9-reglas-de-negocio-por-tipo-de-tarea">9. Reglas de negocio por tipo de tarea</h2>
+<p>En la implementacion actual se usan reglas para prioridad y deadline por tipo.</p>
+<p>Ejemplo (TaskFunctions):</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">getPriorityByType</span> = (<span class="hljs-params">type = <span class="hljs-string">&#x27;&#x27;</span></span>) =&gt; {
+  <span class="hljs-keyword">const</span> normalized = <span class="hljs-title class_">String</span>(type || <span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-title function_">trim</span>().<span class="hljs-title function_">toLowerCase</span>()
+  <span class="hljs-keyword">if</span> (normalized === <span class="hljs-string">&#x27;mantencion&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;ALTA&#x27;</span>
+  <span class="hljs-keyword">if</span> (normalized === <span class="hljs-string">&#x27;aseo&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;MEDIA&#x27;</span>
+  <span class="hljs-keyword">if</span> (normalized === <span class="hljs-string">&#x27;repaso&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;BAJA&#x27;</span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>
+}
+</div></code></pre>
+<p>En Home se usa mapeo para calcular urgencia visual y atrasos.</p>
+<hr>
+<h2 id="10-integracion-con-backend-y-fallback-local">10. Integracion con backend y fallback local</h2>
+<h3 id="101-patron-general-implementado">10.1 Patron general implementado</h3>
+<ol>
+<li>Intentar API.</li>
+<li>Si API falla, usar localStorage (cuando aplica).</li>
+<li>Notificar al usuario.</li>
+<li>Refrescar datos.</li>
+</ol>
+<h3 id="102-ejemplo-users">10.2 Ejemplo Users</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">createUser</span>(result.<span class="hljs-property">value</span>)
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-title function_">createUserAdmin</span>(result.<span class="hljs-property">value</span>)
+}
+<span class="hljs-title function_">showSuccessToast</span>(<span class="hljs-string">&#x27;Usuario creado&#x27;</span>)
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">refreshAll</span>()
+</div></code></pre>
+<h3 id="103-ejemplo-task-checklist">10.3 Ejemplo Task checklist</h3>
+<p>Mismo patron con updateTask -&gt; updateTaskLocal.</p>
+<hr>
+<h2 id="11-escenarios-funcionales-completos">11. Escenarios funcionales completos</h2>
+<h2 id="111-escenario-a-login-trabajador-y-flujo-diario">11.1 Escenario A: Login trabajador y flujo diario</h2>
+<ol>
+<li>Login con credenciales validas.</li>
+<li>Entra a Home personal.</li>
+<li>Ve metricas: pendientes, en progreso, hechas hoy.</li>
+<li>Abre tarea urgente.</li>
+<li>Actualiza checklist.</li>
+<li>Guarda cambios.</li>
+</ol>
+<p>Resultado esperado:</p>
+<ul>
+<li>toast de exito</li>
+<li>cambios persistidos</li>
+<li>panel actualizado</li>
+</ul>
+<h2 id="112-escenario-b-supervisor-revisa-operacion">11.2 Escenario B: Supervisor revisa operacion</h2>
+<ol>
+<li>Login supervisor.</li>
+<li>Abre dashboard general.</li>
+<li>Filtra tareas por estado.</li>
+<li>Revisa usuarios en modulo Users (lectura).</li>
+</ol>
+<p>Resultado esperado:</p>
+<ul>
+<li>acceso operativo sin funciones de administracion total.</li>
+</ul>
+<h2 id="113-escenario-c-falla-backend-durante-guardado">11.3 Escenario C: Falla backend durante guardado</h2>
+<ol>
+<li>Usuario edita checklist.</li>
+<li>API responde error de red.</li>
+<li>Sistema guarda en localStorage y avisa fallback.</li>
+</ol>
+<p>Resultado esperado:</p>
+<ul>
+<li>no se pierde la edicion</li>
+<li>usuario puede continuar operando</li>
+</ul>
+<hr>
+<h2 id="12-riesgos-conocidos-y-mitigaciones">12. Riesgos conocidos y mitigaciones</h2>
+<ol>
+<li>Inconsistencia de formato de rol desde backend</li>
+</ol>
+<ul>
+<li>Mitigacion: normalizacion en getUserRole y claims JWT.</li>
+</ul>
+<ol start="2">
+<li>Endpoint no autorizado para algunos roles</li>
+</ol>
+<ul>
+<li>Mitigacion: no depender de esos endpoints para completar sesion.</li>
+</ul>
+<ol start="3">
+<li>Caida de backend en operaciones de escritura</li>
+</ol>
+<ul>
+<li>Mitigacion: fallback local en modulos criticos.</li>
+</ul>
+<ol start="4">
+<li>Desfase entre reglas frontend y backend</li>
+</ol>
+<ul>
+<li>Mitigacion recomendada: validar reglas de tipo/prioridad/deadline en backend tambien.</li>
+</ul>
+<hr>
+<h2 id="13-checklist-tecnico-de-auditoria">13. Checklist tecnico de auditoria</h2>
+<ol>
+<li>Verificar RequireAuth en rutas privadas.</li>
+<li>Verificar matriz rolePermissions por rol.</li>
+<li>Verificar filtros de data con filterTasksByPermissions.</li>
+<li>Verificar uso de showSuccessToast/showErrorToast en acciones clave.</li>
+<li>Verificar callback onSaveChecklist conectado en Home y Task.</li>
+<li>Verificar fallback local en usuarios y tareas.</li>
+<li>Verificar calculo de metricas y chartData.</li>
+</ol>
+<hr>
+<h2 id="14-conclusiones">14. Conclusiones</h2>
+<p>La implementacion actual logra:</p>
+<ul>
+<li>control de acceso por rol en navegacion, datos y acciones</li>
+<li>experiencia operativa diferenciada por perfil</li>
+<li>visualizacion con metricas y grafico de estados</li>
+<li>feedback consistente con notificaciones</li>
+<li>resiliencia frente a fallas de backend</li>
+</ul>
+<p>Para evolucion futura se recomienda:</p>
+<ul>
+<li>unificar reglas de negocio en backend</li>
+<li>homologar deadlines por tipo en todos los flujos</li>
+<li>automatizar pruebas e2e por rol</li>
+</ul>
+<hr>
+<h1 id="fin-de-la-unión-completa">FIN DE LA UNIÓN COMPLETA</h1>
+<p><strong>Documento generado:</strong> 2026-05-14<br>
+<strong>Total de manuales incluidos:</strong> 0 (Índice) + 1 a 9 = 10 manuales consolidados en uno solo<br>
+<strong>Tamaño aproximado:</strong> Documento integral con toda la documentación técnica, operacional y de usuario</p>
+<p>Este archivo contiene la unión completa de todos los manuales (00 al 09) sin cambios en sus contenidos originales.</p>
+
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>MANUAL_CONEXION_BACKEND_USUARIOS.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="manual-completo-conectar-la-vista-de-usuarios-al-backend-spring-boot">Manual Completo: Conectar la Vista de Usuarios al Backend (Spring Boot)</h1>
+<p>Este manual está hecho para tu proyecto actual y explica todo desde cero, paso por paso, con mucho detalle.</p>
+<p>Archivo de la vista a conectar:</p>
+<ul>
+<li>src/components/users/Users.jsx</li>
+</ul>
+<p>Objetivo:</p>
+<ul>
+<li>Reemplazar los datos mock por datos reales del backend.</li>
+<li>Conectar botones de acción (editar, cambiar rol, desactivar).</li>
+<li>Manejar carga, errores y mensajes visuales.</li>
+</ul>
+<hr>
+<h2 id="1-verificar-que-el-proyecto-frontend-funciona-antes-de-tocar-código">1. Verificar que el proyecto frontend funciona antes de tocar código</h2>
+<ol>
+<li>Abre una terminal en la raíz del proyecto.</li>
+<li>Ejecuta instalación de dependencias (si aún no lo hiciste):</li>
+</ol>
+<pre class="hljs"><code><div>npm install
+</div></code></pre>
+<ol start="3">
+<li>Levanta el frontend:</li>
+</ol>
+<pre class="hljs"><code><div>npm run dev
+</div></code></pre>
+<ol start="4">
+<li>Confirma que abre en navegador (normalmente http://localhost:5173).</li>
+<li>Entra a la pantalla de usuarios y verifica que la UI carga correctamente.</li>
+</ol>
+<p>Si esto no funciona, arregla primero frontend local antes de conectar backend.</p>
+<hr>
+<h2 id="2-verificar-que-el-backend-spring-boot-está-levantado">2. Verificar que el backend Spring Boot está levantado</h2>
+<ol>
+<li>Levanta tu backend.</li>
+<li>Confirma el puerto (ejemplo común: 8080).</li>
+<li>Prueba endpoint de usuarios desde navegador o Postman:</li>
+</ol>
+<pre class="hljs"><code><div>http://localhost:8080/api/v1/users
+</div></code></pre>
+<ol start="4">
+<li>Si responde JSON, puedes continuar.</li>
+<li>Si no responde, revisa backend antes de seguir.</li>
+</ol>
+<hr>
+<h2 id="3-crear-variable-de-entorno-en-vite-para-la-url-del-backend">3. Crear variable de entorno en Vite para la URL del backend</h2>
+<p>Vite requiere prefijo VITE_ para variables que usa React.</p>
+<ol>
+<li>En la raíz del proyecto crea el archivo .env (si no existe).</li>
+<li>Agrega:</li>
+</ol>
+<pre class="hljs"><code><div>VITE_API_URL=http://localhost:8080
+</div></code></pre>
+<ol start="3">
+<li>Guarda el archivo.</li>
+<li>Reinicia npm run dev (muy importante, Vite no toma cambios de .env sin reiniciar).</li>
+</ol>
+<hr>
+<h2 id="4-modificar-usersjsx-para-consumir-api">4. Modificar Users.jsx para consumir API</h2>
+<p>Archivo a editar:</p>
+<ul>
+<li>src/components/users/Users.jsx</li>
+</ul>
+<h3 id="41-cambiar-import-de-react">4.1 Cambiar import de React</h3>
+<p>Reemplaza:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>
+</div></code></pre>
+<p>Por:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, { useEffect, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>
+</div></code></pre>
+<h3 id="42-mantener-mock-opcionalmente-pero-ya-no-renderizarlo">4.2 Mantener mock opcionalmente, pero ya no renderizarlo</h3>
+<p>Puedes dejar mockUsers como respaldo temporal, pero el render debe usar estado users.</p>
+<h3 id="43-agregar-estados-nuevos-y-url-base">4.3 Agregar estados nuevos y URL base</h3>
+<p>Dentro del componente Users, debajo de searchTerm, agrega:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> [users, setUsers] = <span class="hljs-title function_">useState</span>([])
+<span class="hljs-keyword">const</span> [loading, setLoading] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>)
+<span class="hljs-keyword">const</span> [error, setError] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">API_URL</span> = <span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">env</span>.<span class="hljs-property">VITE_API_URL</span> || <span class="hljs-string">&#x27;http://localhost:8080&#x27;</span>
+</div></code></pre>
+<h3 id="44-agregar-función-para-cargar-usuarios-get">4.4 Agregar función para cargar usuarios (GET)</h3>
+<p>Dentro del componente Users, agrega:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">loadUsers</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">true</span>)
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/api/v1/users`</span>)
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Error al cargar usuarios. HTTP <span class="hljs-subst">${response.status}</span>`</span>)
+    }
+
+    <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>()
+
+    <span class="hljs-comment">// Normaliza para que la tabla use siempre los mismos campos</span>
+    <span class="hljs-keyword">const</span> normalizedUsers = data.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">u</span>) =&gt;</span> ({
+      <span class="hljs-attr">id</span>: u.<span class="hljs-property">id</span>,
+      <span class="hljs-attr">name</span>: u.<span class="hljs-property">name</span> ?? <span class="hljs-string">`<span class="hljs-subst">${u.firstName ?? <span class="hljs-string">&#x27;&#x27;</span>}</span> <span class="hljs-subst">${u.lastName ?? <span class="hljs-string">&#x27;&#x27;</span>}</span>`</span>.<span class="hljs-title function_">trim</span>(),
+      <span class="hljs-attr">email</span>: u.<span class="hljs-property">email</span> ?? <span class="hljs-string">&#x27;sin-correo&#x27;</span>,
+      <span class="hljs-attr">role</span>: u.<span class="hljs-property">role</span> ?? <span class="hljs-string">&#x27;Sin rol&#x27;</span>,
+      <span class="hljs-attr">status</span>: u.<span class="hljs-property">status</span> ?? (u.<span class="hljs-property">active</span> ? <span class="hljs-string">&#x27;Activo&#x27;</span> : <span class="hljs-string">&#x27;Inactivo&#x27;</span>),
+      <span class="hljs-attr">avatar</span>: u.<span class="hljs-property">avatar</span> || <span class="hljs-string">`https://i.pravatar.cc/150?u=<span class="hljs-subst">${u.id}</span>`</span>
+    }))
+
+    <span class="hljs-title function_">setUsers</span>(normalizedUsers)
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;No se pudieron cargar los usuarios&#x27;</span>)
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setLoading</span>(<span class="hljs-literal">false</span>)
+  }
+}
+</div></code></pre>
+<h3 id="45-ejecutar-carga-automática-al-entrar-a-la-pantalla">4.5 Ejecutar carga automática al entrar a la pantalla</h3>
+<p>Agrega este bloque dentro del componente Users:</p>
+<pre class="hljs"><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-title function_">loadUsers</span>()
+}, [])
+</div></code></pre>
+<hr>
+<h2 id="5-reemplazar-la-tabla-para-usar-users-en-vez-de-mockusers">5. Reemplazar la tabla para usar users en vez de mockUsers</h2>
+<p>En el render de la tabla cambia:</p>
+<ol>
+<li>Donde hoy haces map/filter sobre mockUsers, usa users.</li>
+<li>En el contador de abajo cambia mockUsers.length por users.length.</li>
+</ol>
+<p>Ejemplo:</p>
+<pre class="hljs"><code><div>{users
+  .<span class="hljs-title function_">filter</span>(
+    <span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span>
+      user.<span class="hljs-property">name</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>()) ||
+      user.<span class="hljs-property">email</span>.<span class="hljs-title function_">toLowerCase</span>().<span class="hljs-title function_">includes</span>(searchTerm.<span class="hljs-title function_">toLowerCase</span>())
+  )
+  .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span> (
+    <span class="hljs-comment">// fila</span>
+  ))}
+</div></code></pre>
+<p>Footer:</p>
+<pre class="hljs"><code><div><span class="hljs-title class_">Mostrando</span> {users.<span class="hljs-property">length</span>} usuarios
+</div></code></pre>
+<hr>
+<h2 id="6-mostrar-estado-de-carga-error-y-lista-vacía">6. Mostrar estado de carga, error y lista vacía</h2>
+<p>Antes de la tabla agrega mensajes:</p>
+<pre class="hljs"><code><div>{error &amp;&amp; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;alert alert-danger mb-3&quot;</span>&gt;</span>{error}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>}
+{loading &amp;&amp; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;small text-secondary mb-2&quot;</span>&gt;</span>Cargando usuarios...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>}
+{!loading &amp;&amp; !error &amp;&amp; users.<span class="hljs-property">length</span> === <span class="hljs-number">0</span> &amp;&amp; (
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;small text-secondary mb-2&quot;</span>&gt;</span>No hay usuarios para mostrar.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+)}
+</div></code></pre>
+<p>Esto evita que la UI quede en blanco sin explicación.</p>
+<hr>
+<h2 id="7-conectar-botón-desactivar-usuario-patch">7. Conectar botón Desactivar usuario (PATCH)</h2>
+<h3 id="71-función">7.1 Función</h3>
+<p>Agrega dentro del componente Users:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleDeactivate</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">userId</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/api/v1/users/<span class="hljs-subst">${userId}</span>/status`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PATCH&#x27;</span>,
+      <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> },
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">status</span>: <span class="hljs-string">&#x27;Inactivo&#x27;</span> })
+    })
+
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`No se pudo desactivar. HTTP <span class="hljs-subst">${response.status}</span>`</span>)
+    }
+
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadUsers</span>()
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;Error al desactivar usuario&#x27;</span>)
+  }
+}
+</div></code></pre>
+<h3 id="72-enlazar-al-botón-rojo">7.2 Enlazar al botón rojo</h3>
+<p>En el botón desactivar agrega:</p>
+<pre class="hljs"><code><div>onClick={<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">handleDeactivate</span>(user.<span class="hljs-property">id</span>)}
+</div></code></pre>
+<hr>
+<h2 id="8-conectar-botón-cambiar-rol-patch">8. Conectar botón Cambiar rol (PATCH)</h2>
+<h3 id="81-función">8.1 Función</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleChangeRole</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">userId, newRole</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/api/v1/users/<span class="hljs-subst">${userId}</span>/role`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PATCH&#x27;</span>,
+      <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> },
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">role</span>: newRole })
+    })
+
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`No se pudo cambiar rol. HTTP <span class="hljs-subst">${response.status}</span>`</span>)
+    }
+
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadUsers</span>()
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;Error al cambiar rol&#x27;</span>)
+  }
+}
+</div></code></pre>
+<h3 id="82-enlazar-al-botón-amarillo">8.2 Enlazar al botón amarillo</h3>
+<pre class="hljs"><code><div>onClick={<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">handleChangeRole</span>(user.<span class="hljs-property">id</span>, <span class="hljs-string">&#x27;Supervisor&#x27;</span>)}
+</div></code></pre>
+<p>Nota:</p>
+<ul>
+<li>Ese valor es de prueba.</li>
+<li>Lo correcto después es abrir un modal o select con roles válidos.</li>
+</ul>
+<hr>
+<h2 id="9-conectar-botón-editar-perfil-put">9. Conectar botón Editar perfil (PUT)</h2>
+<h3 id="91-función">9.1 Función</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleEditUser</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params">userId, payload</span>) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-title function_">setError</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`<span class="hljs-subst">${API_URL}</span>/api/v1/users/<span class="hljs-subst">${userId}</span>`</span>, {
+      <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;PUT&#x27;</span>,
+      <span class="hljs-attr">headers</span>: { <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span> },
+      <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(payload)
+    })
+
+    <span class="hljs-keyword">if</span> (!response.<span class="hljs-property">ok</span>) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`No se pudo editar usuario. HTTP <span class="hljs-subst">${response.status}</span>`</span>)
+    }
+
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">loadUsers</span>()
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-title function_">setError</span>(err.<span class="hljs-property">message</span> || <span class="hljs-string">&#x27;Error al editar usuario&#x27;</span>)
+  }
+}
+</div></code></pre>
+<h3 id="92-enlazar-al-botón-azul">9.2 Enlazar al botón azul</h3>
+<pre class="hljs"><code><div>onClick={<span class="hljs-function">() =&gt;</span>
+  <span class="hljs-title function_">handleEditUser</span>(user.<span class="hljs-property">id</span>, {
+    <span class="hljs-attr">name</span>: user.<span class="hljs-property">name</span>,
+    <span class="hljs-attr">email</span>: user.<span class="hljs-property">email</span>,
+    <span class="hljs-attr">role</span>: user.<span class="hljs-property">role</span>
+  })
+}
+</div></code></pre>
+<p>Nota:</p>
+<ul>
+<li>Esta versión reenvía valores actuales.</li>
+<li>Lo ideal es abrir formulario/modal y enviar cambios reales.</li>
+</ul>
+<hr>
+<h2 id="10-ajustar-cors-en-spring-boot-si-el-navegador-bloquea-peticiones">10. Ajustar CORS en Spring Boot si el navegador bloquea peticiones</h2>
+<p>Síntoma:</p>
+<ul>
+<li>En consola del navegador aparece error CORS.</li>
+</ul>
+<p>Solución general:</p>
+<ol>
+<li>Permitir origen del frontend en backend (ejemplo http://localhost:5173).</li>
+<li>Aplicarlo globalmente o en el controlador de usuarios.</li>
+</ol>
+<p>Si no habilitas CORS, frontend no podrá hablar con backend aunque la API exista.</p>
+<hr>
+<h2 id="11-validación-completa-después-de-integrar">11. Validación completa después de integrar</h2>
+<p>Checklist final:</p>
+<ol>
+<li>Abres vista de usuarios y carga información real del backend.</li>
+<li>Buscador filtra correctamente sobre users.</li>
+<li>Botón desactivar cambia estado y refresca tabla.</li>
+<li>Botón cambiar rol actualiza y refresca.</li>
+<li>Botón editar actualiza y refresca.</li>
+<li>Si backend está caído, se muestra mensaje de error.</li>
+<li>Si backend tarda, aparece Cargando usuarios.</li>
+<li>Si no hay usuarios, aparece mensaje de lista vacía.</li>
+</ol>
+<hr>
+<h2 id="12-errores-comunes-y-cómo-resolverlos">12. Errores comunes y cómo resolverlos</h2>
+<ol>
+<li>Error 404</li>
+</ol>
+<ul>
+<li>Ruta incorrecta.</li>
+<li>Revisa URL exacta de endpoints y prefijo /api.</li>
+</ul>
+<ol start="2">
+<li>Error 401 o 403</li>
+</ol>
+<ul>
+<li>API protegida.</li>
+<li>Debes enviar token Authorization.</li>
+</ul>
+<ol start="3">
+<li>Error 415 Unsupported Media Type</li>
+</ol>
+<ul>
+<li>Falta header Content-Type: application/json.</li>
+</ul>
+<ol start="4">
+<li>Error 500 backend</li>
+</ol>
+<ul>
+<li>Problema del servidor.</li>
+<li>Revisar logs de Spring Boot.</li>
+</ul>
+<ol start="5">
+<li>Tabla vacía sin error</li>
+</ol>
+<ul>
+<li>Mapeo de campos incorrecto.</li>
+<li>Ajusta name, email, role, status según JSON real.</li>
+</ul>
+<hr>
+<h2 id="13-recomendación-para-dejarlo-profesional">13. Recomendación para dejarlo profesional</h2>
+<ol>
+<li>Crear carpeta src/services.</li>
+<li>Mover llamadas fetch a un archivo apiUsers.js.</li>
+<li>Dejar Users.jsx solo para UI y estado.</li>
+<li>Agregar confirmación antes de desactivar.</li>
+<li>Agregar modal real para editar/cambiar rol.</li>
+</ol>
+<hr>
+<h2 id="14-plantilla-mínima-funcional-consolidada-resumen">14. Plantilla mínima funcional consolidada (resumen)</h2>
+<p>Si quieres hacerlo rápido, estos son los elementos obligatorios:</p>
+<ol>
+<li>useEffect para llamar loadUsers.</li>
+<li>Estado users, loading y error.</li>
+<li>fetch GET para listar.</li>
+<li>fetch PATCH/PUT para acciones.</li>
+<li>Reemplazar mockUsers por users en render.</li>
+<li>Variable VITE_API_URL configurada.</li>
+</ol>
+<p>Con eso ya queda conectada la vista al backend.</p>
+
+</body>
+</html>

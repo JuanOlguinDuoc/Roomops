@@ -1,0 +1,292 @@
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --roomops-bg-1: #1A334A;
+  --roomops-bg-2: #1E536E;
+  --roomops-bg-3: #18A3B7;
+  --roomops-surface: #1E536E;
+  --roomops-surface-alt: #5AA5CD;
+  --roomops-border: rgba(90, 165, 205, 0.35);
+  --roomops-text: #EAF8FF;
+  --roomops-text-muted: #B8DFF3;
+  --roomops-accent: #27E6EC;
+  --roomops-accent-soft: rgba(39, 230, 236, 0.22);
+  --roomops-secondary: #6F71A1;
+  --roomops-app-bg:
+    linear-gradient(328deg, rgba(72, 78, 140, 0.52) 0%, rgba(190, 224, 226, 0.30) 100%),
+    url('./assets/images/image_81b7ab4b.png') center center / cover no-repeat fixed;
+
+  --text: var(--roomops-text-muted);
+  --text-h: var(--roomops-text);
+  --bg: var(--roomops-bg-1);
+  --border: var(--roomops-border);
+  --accent: var(--roomops-accent);
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #B8DFF3;
+    --text-h: #27E6EC;
+    --bg: #1A334A;
+    --border: rgba(90, 165, 205, 0.35);
+    --code-bg: rgba(26, 51, 74, 0.84);
+    --accent: #27E6EC;
+    --accent-bg: rgba(39, 230, 236, 0.2);
+    --accent-border: rgba(111, 113, 161, 0.55);
+    --social-bg: rgba(30, 83, 110, 0.38);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--roomops-app-bg);
+}
+
+html.theme-logo-dark {
+  --roomops-bg-1: #0F0A1E;
+  --roomops-bg-2: #161129;
+  --roomops-bg-3: #3B2D60;
+  --roomops-surface: #1C1633;
+  --roomops-surface-alt: #2D244F;
+  --roomops-border: rgba(139, 92, 246, 0.25);
+  --roomops-text: #F5F3FF;
+  --roomops-text-muted: #A5B4FC;
+  --roomops-accent: #A78BFA;
+  --roomops-accent-soft: rgba(167, 139, 250, 0.15);
+  --roomops-secondary: #6366F1;
+  --roomops-app-bg:
+    linear-gradient(135deg, rgba(8, 6, 20, 0.62) 0%, rgba(146, 132, 214, 0.34) 100%),
+    url('./assets/images/image_f40a8f4.png') center center / cover no-repeat fixed;
+
+  /* Status tokens with stronger contrast on deep-purple surfaces */
+  --bs-success: #34D399;
+  --bs-success-rgb: 52, 211, 153;
+  --bs-danger: #FB7185;
+  --bs-danger-rgb: 251, 113, 133;
+  --cui-success: #34D399;
+  --cui-success-rgb: 52, 211, 153;
+  --cui-danger: #FB7185;
+  --cui-danger-rgb: 251, 113, 133;
+
+  --text: var(--roomops-text-muted);
+  --text-h: var(--roomops-text);
+  --bg: var(--roomops-bg-1);
+  --border: var(--roomops-border);
+  --accent: var(--roomops-accent);
+  --bs-border-color: var(--roomops-border);
+  --cui-border-color: var(--roomops-border);
+}
+
+html.theme-logo-dark .card,
+html.theme-logo-dark .modal-content,
+html.theme-logo-dark .offcanvas,
+html.theme-logo-dark .dropdown-menu {
+  background-color: var(--roomops-surface);
+  border-color: var(--roomops-border);
+  color: var(--roomops-text);
+}
+
+html.theme-logo-dark .card-header,
+html.theme-logo-dark .card-footer,
+html.theme-logo-dark .table-light,
+html.theme-logo-dark .bg-light {
+  background-color: var(--roomops-surface-alt) !important;
+  border-color: var(--roomops-border) !important;
+  color: var(--roomops-text);
+}
+
+html.theme-logo-dark .table {
+  --bs-table-color: var(--roomops-text);
+  --bs-table-bg: var(--roomops-surface);
+  --bs-table-border-color: var(--roomops-border);
+  --bs-table-striped-bg: rgba(167, 139, 250, 0.08);
+  --bs-table-striped-color: var(--roomops-text);
+  --bs-table-hover-bg: rgba(167, 139, 250, 0.14);
+  --bs-table-hover-color: var(--roomops-text);
+}
+
+html.theme-logo-dark .table > :not(caption) > * > * {
+  border-bottom-color: var(--roomops-border);
+}
+
+html.theme-logo-dark .border,
+html.theme-logo-dark .border-top,
+html.theme-logo-dark .border-end,
+html.theme-logo-dark .border-bottom,
+html.theme-logo-dark .border-start {
+  border-color: var(--roomops-border) !important;
+}
+
+html.theme-logo-dark .btn-outline-secondary {
+  --bs-btn-color: var(--roomops-text-muted);
+  --bs-btn-border-color: var(--roomops-border);
+  --bs-btn-hover-color: #120f24;
+  --bs-btn-hover-bg: var(--roomops-accent);
+  --bs-btn-hover-border-color: var(--roomops-accent);
+  --bs-btn-active-color: #120f24;
+  --bs-btn-active-bg: var(--roomops-accent);
+  --bs-btn-active-border-color: var(--roomops-accent);
+}
+
+html.theme-logo-dark .btn-outline-info,
+html.theme-logo-dark .btn-outline-warning,
+html.theme-logo-dark .btn-outline-success,
+html.theme-logo-dark .btn-outline-danger {
+  --bs-btn-border-color: var(--roomops-accent);
+  --bs-btn-color: var(--roomops-accent);
+  --bs-btn-hover-color: #120f24;
+  --bs-btn-hover-bg: var(--roomops-accent);
+  --bs-btn-hover-border-color: var(--roomops-accent);
+  --bs-btn-active-color: #120f24;
+  --bs-btn-active-bg: var(--roomops-accent);
+  --bs-btn-active-border-color: var(--roomops-accent);
+}
+
+html.theme-logo-dark .btn-dark {
+  --bs-btn-bg: var(--roomops-surface-alt);
+  --bs-btn-border-color: var(--roomops-border);
+  --bs-btn-color: var(--roomops-text);
+  --bs-btn-hover-bg: var(--roomops-accent);
+  --bs-btn-hover-border-color: var(--roomops-accent);
+  --bs-btn-hover-color: #120f24;
+  --bs-btn-active-bg: var(--roomops-accent);
+  --bs-btn-active-border-color: var(--roomops-accent);
+  --bs-btn-active-color: #120f24;
+}
+
+html.theme-logo-dark .btn-outline-light {
+  --bs-btn-color: var(--roomops-text);
+  --bs-btn-border-color: var(--roomops-border);
+  --bs-btn-hover-color: #120f24;
+  --bs-btn-hover-bg: var(--roomops-accent);
+  --bs-btn-hover-border-color: var(--roomops-accent);
+  --bs-btn-active-color: #120f24;
+  --bs-btn-active-bg: var(--roomops-accent);
+  --bs-btn-active-border-color: var(--roomops-accent);
+}
+
+html.theme-logo-dark .bg-white {
+  background-color: var(--roomops-surface-alt) !important;
+  border-color: var(--roomops-border) !important;
+  color: var(--roomops-text) !important;
+}
+
+html.theme-logo-dark .text-dark {
+  color: var(--roomops-text) !important;
+}
+
+html.theme-logo-dark .form-control,
+html.theme-logo-dark .form-select,
+html.theme-logo-dark .input-group-text {
+  background-color: var(--roomops-surface-alt);
+  border-color: var(--roomops-border);
+  color: var(--roomops-text);
+}
+
+html.theme-logo-dark .form-control::placeholder,
+html.theme-logo-dark .form-select::placeholder {
+  color: var(--roomops-text-muted);
+}
+
+html.theme-logo-dark .pagination .page-link {
+  background-color: var(--roomops-surface);
+  border-color: var(--roomops-border);
+  color: var(--roomops-text);
+}
+
+html.theme-logo-dark .pagination .page-item.active .page-link {
+  background-color: var(--roomops-accent);
+  border-color: var(--roomops-accent);
+  color: #120f24;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  text-align: center;
+  border-inline: 0;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}

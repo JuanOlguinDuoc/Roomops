@@ -1,0 +1,144 @@
+/* Layout base de la aplicacion */
+.app-shell {
+  display: flex;
+  min-height: 100svh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 0.95rem;
+  right: 1rem;
+  z-index: 1200;
+  border: 1px solid rgba(226, 232, 240, 1);
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: rgba(241, 245, 249, 0.98);
+  outline: none;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  padding: 1rem 0.75rem;
+  background: var(--roomops-app-bg);
+  color: #0f172a;
+  border-left: 1px solid rgba(226, 232, 240, 1);
+}
+
+html.theme-logo-dark .app-shell {
+  background: var(--roomops-app-bg);
+}
+
+html.theme-logo-dark .app-main {
+  background: transparent;
+  color: var(--roomops-text);
+  border-left-color: var(--roomops-border);
+}
+
+/* Header mobile (menu hamburguesa + logo) */
+.app-mobile-header {
+  display: none;
+}
+
+/* Boton hamburguesa */
+.app-hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.app-hamburger:hover,
+.app-hamburger:focus-visible {
+  background: var(--roomops-accent-soft);
+  outline: none;
+}
+
+.app-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--roomops-text);
+  border-radius: 2px;
+}
+
+.app-mobile-logo {
+  height: 26px;
+  width: auto;
+}
+
+/* Tablet y desktop */
+@media (min-width: 768px) {
+  .app-main {
+    padding: 2rem;
+  }
+}
+
+/* Mobile real */
+@media (max-width: 767px) {
+  .theme-toggle {
+    top: 0.55rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .app-mobile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(90deg, #dff8ff, #b9ecff);
+    border-bottom: 1px solid rgba(226, 232, 240, 1);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .app-main {
+    border-left: none;
+    width: 100%;
+    min-height: calc(100svh - 3.25rem);
+    padding: 1rem 0.75rem;
+  }
+}
+
+html.theme-logo-dark .theme-toggle {
+  background: var(--roomops-surface);
+  color: var(--roomops-text);
+  border-color: var(--roomops-border);
+}
+
+html.theme-logo-dark .theme-toggle:hover,
+html.theme-logo-dark .theme-toggle:focus-visible {
+  background: var(--roomops-surface-alt);
+}
+
+html.theme-logo-dark .app-mobile-header {
+  background: linear-gradient(90deg, var(--roomops-bg-1), var(--roomops-bg-2));
+}

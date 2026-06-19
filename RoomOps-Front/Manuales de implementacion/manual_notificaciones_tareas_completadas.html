@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>manual_notificaciones_tareas_completadas.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="manual-de-implementacion-notificaciones-de-tareas-completadas">Manual de implementacion: notificaciones de tareas completadas</h1>
+<h2 id="objetivo">Objetivo</h2>
+<p>Implementar en el dashboard admin:</p>
+<ol>
+<li>Un punto rojo en el boton de notificaciones cuando una tarea pase a completada.</li>
+<li>Un popup con SweetAlert2 al presionar el boton, mostrando las tareas completadas.</li>
+<li>Marcar esas notificaciones como leidas despues de verlas.</li>
+</ol>
+<hr>
+<h2 id="resumen-funcional">Resumen funcional</h2>
+<h3 id="explicacion-no-tecnica">Explicacion no tecnica</h3>
+<p>Piensalo como una bandeja de alertas:</p>
+<ol>
+<li>El sistema revisa si una tarea cambio de estado a completada.</li>
+<li>Si detecta ese cambio, crea una notificacion nueva.</li>
+<li>Si existen notificaciones no leidas, muestra el punto rojo en la campana.</li>
+<li>Al tocar la campana, se abre una ventana con el listado de tareas completadas.</li>
+<li>Al cerrar esa ventana, las notificaciones se marcan como leidas y desaparece el punto rojo.</li>
+</ol>
+<h3 id="explicacion-tecnica">Explicacion tecnica</h3>
+<p>Se implementa con tres piezas:</p>
+<ol>
+<li>Estado React para manejar notificaciones en memoria.</li>
+<li>localStorage para persistir notificaciones y snapshot de estado por tarea entre recargas.</li>
+<li>Deteccion de transicion de estado (de no done a done) para crear notificaciones solo cuando hay cambio real.</li>
+</ol>
+<hr>
+<h2 id="archivo-principal-a-modificar">Archivo principal a modificar</h2>
+<ul>
+<li>src/components/home/Home.jsx</li>
+</ul>
+<p>Archivo opcional para estilos del popup:</p>
+<ul>
+<li>src/components/home/Home.css</li>
+</ul>
+<hr>
+<h2 id="paso-1-importar-sweetalert2">Paso 1: importar SweetAlert2</h2>
+<h3 id="que-agregar">Que agregar</h3>
+<p>En los imports de Home.jsx agrega:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> <span class="hljs-title class_">Swal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;sweetalert2&#x27;</span>
+</div></code></pre>
+<h3 id="por-que">Por que</h3>
+<ul>
+<li>No tecnico: necesitas la ventana emergente para mostrar el listado de tareas completadas.</li>
+<li>Tecnico: Home.jsx debe usar Swal.fire para renderizar el popup de notificaciones.</li>
+</ul>
+<hr>
+<h2 id="paso-2-crear-claves-de-localstorage">Paso 2: crear claves de localStorage</h2>
+<h3 id="que-agregar-1">Que agregar</h3>
+<p>Define constantes cerca de tus constantes globales:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span> = <span class="hljs-string">&#x27;roomops-completed-notifications&#x27;</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span> = <span class="hljs-string">&#x27;roomops-task-status-snapshot&#x27;</span>
+</div></code></pre>
+<h3 id="por-que-1">Por que</h3>
+<ul>
+<li>No tecnico: para que los avisos no se pierdan al recargar la pagina.</li>
+<li>Tecnico: se guardan notificaciones y el ultimo estado conocido por taskId para detectar transiciones.</li>
+</ul>
+<hr>
+<h2 id="paso-3-crear-estado-para-notificaciones">Paso 3: crear estado para notificaciones</h2>
+<h3 id="que-agregar-2">Que agregar</h3>
+<p>Dentro del componente Home (dashboard admin), agrega estado:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> [notifications, setNotifications] = <span class="hljs-title function_">useState</span>([])
+</div></code></pre>
+<p>Y un useEffect de carga inicial:</p>
+<pre class="hljs"><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> raw = <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>)
+    <span class="hljs-keyword">const</span> parsed = raw ? <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(raw) : []
+    <span class="hljs-title function_">setNotifications</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(parsed) ? parsed : [])
+  } <span class="hljs-keyword">catch</span> {
+    <span class="hljs-title function_">setNotifications</span>([])
+  }
+}, [])
+</div></code></pre>
+<h3 id="por-que-2">Por que</h3>
+<ul>
+<li>No tecnico: esto es la bandeja interna de avisos.</li>
+<li>Tecnico: el estado React permite render condicional del punto rojo y refresco automatico de la UI.</li>
+</ul>
+<hr>
+<h2 id="paso-4-detectar-cuando-una-tarea-pasa-a-completada">Paso 4: detectar cuando una tarea pasa a completada</h2>
+<h3 id="que-agregar-3">Que agregar</h3>
+<p>Crea un useEffect que observe tareas visibles y statusById.</p>
+<p>Logica recomendada:</p>
+<ol>
+<li>Construir mapa actual: taskId -&gt; statusKey con getTaskStatusKey.</li>
+<li>Leer snapshot previo desde localStorage.</li>
+<li>Comparar cada tarea:
+<ul>
+<li>si previo != done y actual == done =&gt; crear notificacion.</li>
+</ul>
+</li>
+<li>Guardar snapshot nuevo.</li>
+<li>Guardar notificaciones nuevas en estado y localStorage.</li>
+</ol>
+<p>Ejemplo base:</p>
+<pre class="hljs"><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(tasks) || tasks.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">const</span> currentSnapshot = {}
+  tasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (task?.<span class="hljs-property">id</span> == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>
+    currentSnapshot[<span class="hljs-title class_">String</span>(task.<span class="hljs-property">id</span>)] = <span class="hljs-title function_">getTaskStatusKey</span>(task, statusById)
+  })
+
+  <span class="hljs-keyword">const</span> rawPrev = <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>)
+  <span class="hljs-keyword">const</span> prevSnapshot = rawPrev ? <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(rawPrev) : <span class="hljs-literal">null</span>
+
+  <span class="hljs-comment">// Primera carga: solo guardar snapshot, sin generar notificaciones historicas</span>
+  <span class="hljs-keyword">if</span> (!prevSnapshot || <span class="hljs-keyword">typeof</span> prevSnapshot !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+    <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(currentSnapshot))
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> justCompleted = []
+
+  tasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (task?.<span class="hljs-property">id</span> == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>
+
+    <span class="hljs-keyword">const</span> id = <span class="hljs-title class_">String</span>(task.<span class="hljs-property">id</span>)
+    <span class="hljs-keyword">const</span> prevStatus = prevSnapshot[id]
+    <span class="hljs-keyword">const</span> nextStatus = currentSnapshot[id]
+
+    <span class="hljs-keyword">if</span> (prevStatus !== <span class="hljs-string">&#x27;done&#x27;</span> &amp;&amp; nextStatus === <span class="hljs-string">&#x27;done&#x27;</span>) {
+      justCompleted.<span class="hljs-title function_">push</span>({
+        <span class="hljs-attr">id</span>: <span class="hljs-string">`<span class="hljs-subst">${id}</span>-<span class="hljs-subst">${<span class="hljs-built_in">Date</span>.now()}</span>`</span>,
+        <span class="hljs-attr">taskId</span>: task.<span class="hljs-property">id</span>,
+        <span class="hljs-attr">title</span>: task.<span class="hljs-property">titulo</span> || <span class="hljs-string">&#x27;Tarea sin titulo&#x27;</span>,
+        <span class="hljs-attr">completedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>(),
+        <span class="hljs-attr">read</span>: <span class="hljs-literal">false</span>
+      })
+    }
+  })
+
+  <span class="hljs-keyword">if</span> (justCompleted.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-title function_">setNotifications</span>(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> next = [...justCompleted, ...prev].<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>)
+      <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(next))
+      <span class="hljs-keyword">return</span> next
+    })
+  }
+
+  <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(currentSnapshot))
+}, [tasks, statusById])
+</div></code></pre>
+<h3 id="por-que-3">Por que</h3>
+<ul>
+<li>No tecnico: compara un antes y un despues para saber que tarea se completo recien.</li>
+<li>Tecnico: evita falsos positivos; una tarea ya completada no debe volver a notificar en cada render.</li>
+</ul>
+<hr>
+<h2 id="paso-5-calcular-no-leidas">Paso 5: calcular no leidas</h2>
+<h3 id="que-agregar-4">Que agregar</h3>
+<p>Agrega contador derivado:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> unreadCount = <span class="hljs-title function_">useMemo</span>(
+  <span class="hljs-function">() =&gt;</span> notifications.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> !item?.<span class="hljs-property">read</span>).<span class="hljs-property">length</span>,
+  [notifications]
+)
+</div></code></pre>
+<h3 id="por-que-4">Por que</h3>
+<ul>
+<li>No tecnico: decide si debe mostrarse el punto rojo.</li>
+<li>Tecnico: separa estado base y valor derivado para mantener UI consistente.</li>
+</ul>
+<hr>
+<h2 id="paso-6-crear-handler-del-popup-sweetalert2">Paso 6: crear handler del popup SweetAlert2</h2>
+<h3 id="que-agregar-5">Que agregar</h3>
+<p>Crea una funcion handleOpenNotifications:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleOpenNotifications</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">if</span> (!notifications.<span class="hljs-property">length</span>) {
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>({
+      <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;info&#x27;</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Notificaciones&#x27;</span>,
+      <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;No hay tareas completadas para mostrar.&#x27;</span>
+    })
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> itemsHtml = notifications
+    .<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">20</span>)
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">n</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> dateText = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(n.<span class="hljs-property">completedAt</span>).<span class="hljs-title function_">toLocaleString</span>(<span class="hljs-string">&#x27;es-CL&#x27;</span>)
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`&lt;li style=&quot;margin-bottom:8px;&quot;&gt;&lt;strong&gt;<span class="hljs-subst">${n.title}</span>&lt;/strong&gt;&lt;br/&gt;&lt;small&gt;<span class="hljs-subst">${dateText}</span>&lt;/small&gt;&lt;/li&gt;`</span>
+    })
+    .<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+  <span class="hljs-keyword">await</span> <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>({
+    <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;success&#x27;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Tareas completadas&#x27;</span>,
+    <span class="hljs-attr">html</span>: <span class="hljs-string">`&lt;ul style=&quot;text-align:left;padding-left:18px;max-height:280px;overflow:auto;&quot;&gt;<span class="hljs-subst">${itemsHtml}</span>&lt;/ul&gt;`</span>,
+    <span class="hljs-attr">confirmButtonText</span>: <span class="hljs-string">&#x27;Entendido&#x27;</span>
+  })
+
+  <span class="hljs-title function_">setNotifications</span>(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> next = prev.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> ({ ...item, <span class="hljs-attr">read</span>: <span class="hljs-literal">true</span> }))
+    <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(next))
+    <span class="hljs-keyword">return</span> next
+  })
+}
+</div></code></pre>
+<h3 id="por-que-5">Por que</h3>
+<ul>
+<li>No tecnico: al tocar la campana ves el resumen de tareas completadas.</li>
+<li>Tecnico: el popup consume notificaciones y sincroniza estado read en memoria y persistencia.</li>
+</ul>
+<hr>
+<h2 id="paso-7-conectar-boton-de-campana">Paso 7: conectar boton de campana</h2>
+<h3 id="que-modificar">Que modificar</h3>
+<p>En el boton actual de Home.jsx:</p>
+<ol>
+<li>Agrega onClick.</li>
+<li>Muestra punto rojo solo si unreadCount &gt; 0.</li>
+</ol>
+<p>Ejemplo:</p>
+<pre class="hljs"><code><div>&lt;button
+  type=<span class="hljs-string">&quot;button&quot;</span>
+  className=<span class="hljs-string">&quot;home-icon-button&quot;</span>
+  aria-label=<span class="hljs-string">&quot;Notificaciones&quot;</span>
+  onClick={handleOpenNotifications}
+&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Bell</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{18}</span> /&gt;</span></span>
+  {unreadCount &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;home-notification-dot&quot;</span> /&gt;</span></span>}
+&lt;/button&gt;
+</div></code></pre>
+<h3 id="por-que-6">Por que</h3>
+<ul>
+<li>No tecnico: el punto rojo aparece solo cuando hay cosas nuevas.</li>
+<li>Tecnico: render condicional basado en estado derivado evita indicadores falsos.</li>
+</ul>
+<hr>
+<h2 id="paso-8-opcional-estilos-del-popup">Paso 8 (opcional): estilos del popup</h2>
+<p>Si quieres darle estilo al contenido HTML del popup, puedes agregar clases CSS en Home.css y usarlas en el html de Swal.fire.</p>
+<hr>
+<h2 id="paso-9-pruebas-recomendadas">Paso 9: pruebas recomendadas</h2>
+<ol>
+<li>Carga Home con tareas no completadas.</li>
+<li>Completa una tarea desde tu flujo actual.</li>
+<li>Verifica que aparece el punto rojo en la campana.</li>
+<li>Presiona campana y valida que aparece la tarea en el popup.</li>
+<li>Cierra popup y verifica que desaparece el punto rojo.</li>
+<li>Recarga la pagina y confirma que el estado leido se mantiene.</li>
+<li>Completa otra tarea y confirma que vuelve a aparecer el punto rojo.</li>
+</ol>
+<hr>
+<h2 id="errores-comunes-y-como-evitarlos">Errores comunes y como evitarlos</h2>
+<ol>
+<li>Error: se generan notificaciones viejas al cargar por primera vez.</li>
+</ol>
+<ul>
+<li>Causa: no distinguir primera carga.</li>
+<li>Solucion: si no hay snapshot previo, solo guardar snapshot y salir.</li>
+</ul>
+<ol start="2">
+<li>Error: el punto rojo nunca desaparece.</li>
+</ol>
+<ul>
+<li>Causa: no marcar read o no persistir despues del popup.</li>
+<li>Solucion: actualizar notifications y localStorage al cerrar Swal.</li>
+</ul>
+<ol start="3">
+<li>Error: se duplica la misma notificacion.</li>
+</ol>
+<ul>
+<li>Causa: detectar done sin comparar estado previo.</li>
+<li>Solucion: validar transicion exacta previo != done y actual == done.</li>
+</ul>
+<hr>
+<h2 id="resultado-esperado">Resultado esperado</h2>
+<p>Cuando implementes estos pasos:</p>
+<ol>
+<li>La campana se comporta como centro de notificaciones real.</li>
+<li>El usuario recibe feedback visual inmediato (punto rojo).</li>
+<li>Puede consultar completadas en popup SweetAlert2.</li>
+<li>El sistema mantiene historial y estado de lectura incluso con recargas.</li>
+</ol>
+<hr>
+<h2 id="bloques-completos-listos-para-pegar">Bloques completos listos para pegar</h2>
+<p>Esta seccion responde exactamente a: &quot;que codigo debo ir escribiendo&quot;.</p>
+<p>Importante:</p>
+<ol>
+<li>Estos cambios son para el Home administrativo (el componente Home principal), no para WorkerDashboard.</li>
+<li>Copia cada bloque en el lugar indicado.</li>
+</ol>
+<h3 id="1-import-nuevo">1) Import nuevo</h3>
+<p>En la zona de imports de Home.jsx:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> <span class="hljs-title class_">Swal</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;sweetalert2&#x27;</span>
+</div></code></pre>
+<h3 id="2-constantes-nuevas">2) Constantes nuevas</h3>
+<p>Agrega cerca de las constantes globales (por ejemplo despues de PERIOD_OPTIONS):</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span> = <span class="hljs-string">&#x27;roomops-completed-notifications&#x27;</span>
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span> = <span class="hljs-string">&#x27;roomops-task-status-snapshot&#x27;</span>
+</div></code></pre>
+<h3 id="3-estado-y-carga-inicial">3) Estado y carga inicial</h3>
+<p>Dentro del componente export default function Home(), junto a tus useState actuales:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> [notifications, setNotifications] = <span class="hljs-title function_">useState</span>([])
+</div></code></pre>
+<p>Y dentro de un useEffect de inicializacion en Home:</p>
+<pre class="hljs"><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> raw = <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>)
+    <span class="hljs-keyword">const</span> parsed = raw ? <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(raw) : []
+    <span class="hljs-title function_">setNotifications</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(parsed) ? parsed : [])
+  } <span class="hljs-keyword">catch</span> {
+    <span class="hljs-title function_">setNotifications</span>([])
+  }
+}, [])
+</div></code></pre>
+<h3 id="4-efecto-para-detectar-tareas-recien-completadas">4) Efecto para detectar tareas recien completadas</h3>
+<p>Agrega este useEffect en Home, despues de tener tasks y statusById disponibles:</p>
+<pre class="hljs"><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">isArray</span>(tasks) || tasks.<span class="hljs-property">length</span> === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>
+
+  <span class="hljs-keyword">const</span> currentSnapshot = {}
+
+  tasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (task?.<span class="hljs-property">id</span> == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>
+    currentSnapshot[<span class="hljs-title class_">String</span>(task.<span class="hljs-property">id</span>)] = <span class="hljs-title function_">getTaskStatusKey</span>(task, statusById)
+  })
+
+  <span class="hljs-keyword">let</span> prevSnapshot = <span class="hljs-literal">null</span>
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> rawPrev = <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">getItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>)
+    prevSnapshot = rawPrev ? <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(rawPrev) : <span class="hljs-literal">null</span>
+  } <span class="hljs-keyword">catch</span> {
+    prevSnapshot = <span class="hljs-literal">null</span>
+  }
+
+  <span class="hljs-comment">// Primera carga: registra estado actual y evita generar notificaciones historicas.</span>
+  <span class="hljs-keyword">if</span> (!prevSnapshot || <span class="hljs-keyword">typeof</span> prevSnapshot !== <span class="hljs-string">&#x27;object&#x27;</span>) {
+    <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(currentSnapshot))
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> justCompleted = []
+
+  tasks.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">task</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (task?.<span class="hljs-property">id</span> == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>
+
+    <span class="hljs-keyword">const</span> id = <span class="hljs-title class_">String</span>(task.<span class="hljs-property">id</span>)
+    <span class="hljs-keyword">const</span> prevStatus = prevSnapshot[id]
+    <span class="hljs-keyword">const</span> nextStatus = currentSnapshot[id]
+
+    <span class="hljs-keyword">if</span> (prevStatus !== <span class="hljs-string">&#x27;done&#x27;</span> &amp;&amp; nextStatus === <span class="hljs-string">&#x27;done&#x27;</span>) {
+      justCompleted.<span class="hljs-title function_">push</span>({
+        <span class="hljs-attr">id</span>: <span class="hljs-string">`<span class="hljs-subst">${id}</span>-<span class="hljs-subst">${<span class="hljs-built_in">Date</span>.now()}</span>-<span class="hljs-subst">${<span class="hljs-built_in">Math</span>.random().toString(<span class="hljs-number">36</span>).slice(<span class="hljs-number">2</span>, <span class="hljs-number">8</span>)}</span>`</span>,
+        <span class="hljs-attr">taskId</span>: task.<span class="hljs-property">id</span>,
+        <span class="hljs-attr">title</span>: task.<span class="hljs-property">titulo</span> || <span class="hljs-string">&#x27;Tarea sin titulo&#x27;</span>,
+        <span class="hljs-attr">completedAt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>(),
+        <span class="hljs-attr">read</span>: <span class="hljs-literal">false</span>
+      })
+    }
+  })
+
+  <span class="hljs-keyword">if</span> (justCompleted.<span class="hljs-property">length</span> &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-title function_">setNotifications</span>(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> next = [...justCompleted, ...prev].<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">50</span>)
+      <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(next))
+      <span class="hljs-keyword">return</span> next
+    })
+  }
+
+  <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">TASK_STATUS_SNAPSHOT_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(currentSnapshot))
+}, [tasks, statusById])
+</div></code></pre>
+<h3 id="5-contador-de-no-leidas">5) Contador de no leidas</h3>
+<p>Agrega este useMemo en Home:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> unreadCount = <span class="hljs-title function_">useMemo</span>(
+  <span class="hljs-function">() =&gt;</span> notifications.<span class="hljs-title function_">filter</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> !item?.<span class="hljs-property">read</span>).<span class="hljs-property">length</span>,
+  [notifications]
+)
+</div></code></pre>
+<h3 id="6-handler-del-boton-de-notificaciones">6) Handler del boton de notificaciones</h3>
+<p>Agrega esta funcion en Home:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> <span class="hljs-title function_">handleOpenNotifications</span> = <span class="hljs-keyword">async</span> (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">if</span> (!notifications.<span class="hljs-property">length</span>) {
+    <span class="hljs-keyword">await</span> <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>({
+      <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;info&#x27;</span>,
+      <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Notificaciones&#x27;</span>,
+      <span class="hljs-attr">text</span>: <span class="hljs-string">&#x27;No hay tareas completadas para mostrar.&#x27;</span>
+    })
+    <span class="hljs-keyword">return</span>
+  }
+
+  <span class="hljs-keyword">const</span> itemsHtml = notifications
+    .<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">20</span>)
+    .<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> dateText = item?.<span class="hljs-property">completedAt</span>
+        ? <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(item.<span class="hljs-property">completedAt</span>).<span class="hljs-title function_">toLocaleString</span>(<span class="hljs-string">&#x27;es-CL&#x27;</span>)
+        : <span class="hljs-string">&#x27;Sin fecha&#x27;</span>
+
+      <span class="hljs-keyword">return</span> <span class="hljs-string">`
+        &lt;li style=&quot;margin-bottom:8px;&quot;&gt;
+          &lt;strong&gt;<span class="hljs-subst">${item?.title || <span class="hljs-string">&#x27;Tarea sin titulo&#x27;</span>}</span>&lt;/strong&gt;&lt;br/&gt;
+          &lt;small&gt;<span class="hljs-subst">${dateText}</span>&lt;/small&gt;
+        &lt;/li&gt;
+      `</span>
+    })
+    .<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;&#x27;</span>)
+
+  <span class="hljs-keyword">await</span> <span class="hljs-title class_">Swal</span>.<span class="hljs-title function_">fire</span>({
+    <span class="hljs-attr">icon</span>: <span class="hljs-string">&#x27;success&#x27;</span>,
+    <span class="hljs-attr">title</span>: <span class="hljs-string">&#x27;Tareas completadas&#x27;</span>,
+    <span class="hljs-attr">html</span>: <span class="hljs-string">`&lt;ul style=&quot;text-align:left;padding-left:18px;max-height:280px;overflow:auto;&quot;&gt;<span class="hljs-subst">${itemsHtml}</span>&lt;/ul&gt;`</span>,
+    <span class="hljs-attr">confirmButtonText</span>: <span class="hljs-string">&#x27;Entendido&#x27;</span>
+  })
+
+  <span class="hljs-title function_">setNotifications</span>(<span class="hljs-function">(<span class="hljs-params">prev</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> next = prev.<span class="hljs-title function_">map</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> ({ ...item, <span class="hljs-attr">read</span>: <span class="hljs-literal">true</span> }))
+    <span class="hljs-variable language_">window</span>.<span class="hljs-property">localStorage</span>.<span class="hljs-title function_">setItem</span>(<span class="hljs-variable constant_">COMPLETED_NOTIFICATIONS_KEY</span>, <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(next))
+    <span class="hljs-keyword">return</span> next
+  })
+}
+</div></code></pre>
+<h3 id="7-reemplazo-del-boton-de-campana">7) Reemplazo del boton de campana</h3>
+<p>Busca el boton actual de notificaciones y dejalo asi:</p>
+<pre class="hljs"><code><div>&lt;button
+  type=<span class="hljs-string">&quot;button&quot;</span>
+  className=<span class="hljs-string">&quot;home-icon-button&quot;</span>
+  aria-label=<span class="hljs-string">&quot;Notificaciones&quot;</span>
+  onClick={handleOpenNotifications}
+&gt;
+  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Bell</span> <span class="hljs-attr">size</span>=<span class="hljs-string">{18}</span> /&gt;</span></span>
+  {unreadCount &gt; <span class="hljs-number">0</span> &amp;&amp; <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;home-notification-dot&quot;</span> /&gt;</span></span>}
+&lt;/button&gt;
+</div></code></pre>
+<h3 id="8-validacion-rapida-final">8) Validacion rapida final</h3>
+<ol>
+<li>Completa una tarea.</li>
+<li>Confirma que aparezca el punto rojo.</li>
+<li>Haz click en la campana y revisa el popup.</li>
+<li>Cierra popup y confirma que el punto rojo desaparezca.</li>
+</ol>
+<hr>
+<h2 id="anexo-fixes">Anexo: Fixes</h2>
+<p>Este anexo documenta los fixes aplicados para que la funcionalidad no falle en escenarios reales.</p>
+<h3 id="fix-1-nombre-de-clave-consistente-en-localstorage">Fix 1: nombre de clave consistente en localStorage</h3>
+<p>Lineas modificadas en Home.jsx:</p>
+<ol>
+<li>87</li>
+<li>683</li>
+<li>758</li>
+<li>807</li>
+<li>837</li>
+</ol>
+<p>Explicacion no tecnica:</p>
+<ol>
+<li>Antes el sistema podia guardar en un &quot;cajon&quot; y leer desde otro.</li>
+<li>Ahora siempre usa el mismo nombre de llave, por eso las notificaciones no se pierden ni se desincronizan.</li>
+</ol>
+<p>Explicacion tecnica:</p>
+<ol>
+<li>Se unifico la constante de persistencia en COMPLETED_NOTIFICATIONS_KEY.</li>
+<li>Todas las operaciones getItem/setItem del historial de notificaciones apuntan a la misma clave.</li>
+</ol>
+<p>Codigo aplicado:</p>
+<pre><code class="language-jsx">const COMPLETED_NOTIFICATIONS_KEY = 'roomops-completed-notifications'
+
+const raw = window.localStorage.getItem(COMPLETED_NOTIFICATIONS_KEY)
+
+window.localStorage.setItem(COMPLETED_NOTIFICATIONS_KEY, JSON.stringify(next))
+</code></pre>
+<h3 id="fix-2-parse-seguro-del-snapshot">Fix 2: parse seguro del snapshot</h3>
+<p>Lineas modificadas en Home.jsx:</p>
+<ol>
+<li>776</li>
+<li>779</li>
+<li>781</li>
+</ol>
+<p>Explicacion no tecnica:</p>
+<ol>
+<li>Si los datos guardados venian dañados, el sistema se caia.</li>
+<li>Ahora, si detecta error, limpia ese valor en memoria y sigue funcionando.</li>
+</ol>
+<p>Explicacion tecnica:</p>
+<ol>
+<li>Se envolvio JSON.parse en try/catch al leer TASK_STATUS_SNAPSHOT_KEY.</li>
+<li>Se usa fallback prevSnapshot = null para entrar al flujo seguro de inicializacion.</li>
+</ol>
+<p>Codigo aplicado:</p>
+<pre><code class="language-jsx">let prevSnapshot = null
+try {
+  const rawPrev = window.localStorage.getItem(TASK_STATUS_SNAPSHOT_KEY)
+  prevSnapshot = rawPrev ? JSON.parse(rawPrev) : null
+} catch {
+  prevSnapshot = null
+}
+</code></pre>
+<h3 id="fix-3-siembra-inicial-de-notificaciones-bootstrap">Fix 3: siembra inicial de notificaciones (bootstrap)</h3>
+<p>Lineas modificadas en Home.jsx:</p>
+<ol>
+<li>784</li>
+<li>787</li>
+<li>797</li>
+<li>807</li>
+</ol>
+<p>Explicacion no tecnica:</p>
+<ol>
+<li>Si entrabas al dashboard y ya habia tareas completadas, la campana aparecia vacia.</li>
+<li>Ahora, en la primera carga, el sistema &quot;siembra&quot; esas tareas completadas como notificaciones iniciales.</li>
+</ol>
+<p>Explicacion tecnica:</p>
+<ol>
+<li>Se detecta completedTasks usando getTaskStatusKey(task, statusById) === 'done'.</li>
+<li>Si no existe snapshot previo y no hay historial cargado, se genera arreglo seeded y se persiste.</li>
+<li>El historial queda limitado a 50 para evitar crecimiento indefinido.</li>
+</ol>
+<p>Codigo aplicado:</p>
+<pre><code class="language-jsx">const completedTasks = tasks.filter((task) =&gt; getTaskStatusKey(task, statusById) === 'done')
+
+if (!prevSnapshot || typeof prevSnapshot !== 'object') {
+  setNotifications((prev) =&gt; {
+    if (Array.isArray(prev) &amp;&amp; prev.length &gt; 0) return prev
+    if (completedTasks.length === 0) return prev
+
+    const seeded = completedTasks
+      .slice(0, 50)
+      .map((task, index) =&gt; ({
+        id: `seed-${task.id}-${index}`,
+        taskId: task.id,
+        title: task.titulo || `Tarea ${task.id}`,
+        completedAt: new Date().toISOString(),
+        read: false
+      }))
+
+    window.localStorage.setItem(COMPLETED_NOTIFICATIONS_KEY, JSON.stringify(seeded))
+    return seeded
+  })
+
+  window.localStorage.setItem(TASK_STATUS_SNAPSHOT_KEY, JSON.stringify(currentSnapshot))
+  return
+}
+</code></pre>
+<h3 id="fix-4-punto-rojo-condicional">Fix 4: punto rojo condicional</h3>
+<p>Lineas modificadas en Home.jsx:</p>
+<ol>
+<li>727</li>
+<li>949</li>
+</ol>
+<p>Explicacion no tecnica:</p>
+<ol>
+<li>El punto rojo puede confundir si aparece siempre.</li>
+<li>Ahora solo aparece cuando realmente hay pendientes por revisar.</li>
+</ol>
+<p>Explicacion tecnica:</p>
+<ol>
+<li>Se calcula unreadCount desde notifications.filter(item =&gt; !item.read).</li>
+<li>Se aplica render condicional en JSX con unreadCount &gt; 0.</li>
+</ol>
+<p>Codigo aplicado:</p>
+<pre><code class="language-jsx">const unreadCount = useMemo(() =&gt; notifications.filter((item) =&gt; !item?.read).length, [notifications])
+
+{unreadCount &gt; 0 &amp;&amp; &lt;span className=&quot;home-notification-dot&quot; /&gt;}
+</code></pre>
+<h3 id="fix-5-marcado-de-leidas-al-cerrar-popup">Fix 5: marcado de leidas al cerrar popup</h3>
+<p>Lineas modificadas en Home.jsx:</p>
+<ol>
+<li>731</li>
+<li>749</li>
+<li>758</li>
+</ol>
+<p>Explicacion no tecnica:</p>
+<ol>
+<li>Cuando revisas la campana, el sistema debe entender que ya viste esos avisos.</li>
+<li>Por eso, al cerrar el popup, se marcan como leidos y el punto rojo desaparece.</li>
+</ol>
+<p>Explicacion tecnica:</p>
+<ol>
+<li>El flujo de handleNotificationsClick ejecuta Swal.fire para abrir el popup.</li>
+<li>Al resolverse la promesa, se transforma notifications -&gt; read: true y se sincroniza localStorage.</li>
+</ol>
+<p>Codigo aplicado:</p>
+<pre><code class="language-jsx">const handleNotificationsClick = async () =&gt; {
+  await Swal.fire({
+    icon: 'success',
+    title: 'Tareas Completadas',
+    html: '&lt;ul&gt;...&lt;/ul&gt;',
+    confirmButtonText: 'Cerrar'
+  })
+
+  setNotifications((prev) =&gt; {
+    const next = prev.map((n) =&gt; ({ ...n, read: true }))
+    window.localStorage.setItem(COMPLETED_NOTIFICATIONS_KEY, JSON.stringify(next))
+    return next
+  })
+}
+</code></pre>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* Estilos personalizados para SweetAlert2 - Tema Gaming Dark */
+
+.dark-popup {
+    border: 2px solid #7CEBB9 !important;
+    border-radius: 12px !important;
+    box-shadow: 
+        0 8px 16px rgba(23, 0, 47, 0.8),
+        0 4px 8px rgba(34, 1, 63, 0.9),
+        0 2px 4px rgba(20, 0, 34, 0.3) !important;
+}
+
+.dark-title {
+    font-family: 'Arial', sans-serif !important;
+    font-weight: bold !important;
+    font-size: 1.5rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-content {
+    font-size: 1rem !important;
+    opacity: 0.9 !important;
+}
+
+.success-popup {
+    border-color: #7CEBB9 !important;
+}
+
+.success-title {
+    color: #7CEBB9 !important;
+}
+
+/* Personalizar botones de SweetAlert */
+.swal2-confirm {
+    background: linear-gradient(45deg, #5459AC, #66C2FF) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1.5rem !important;
+    font-weight: bold !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 8px rgba(84, 89, 172, 0.3) !important;
+}
+
+.swal2-confirm:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 12px rgba(84, 89, 172, 0.4) !important;
+}
+
+.swal2-cancel {
+    background: rgba(82, 53, 123, 0.8) !important;
+    border: 1px solid #7CEBB9 !important;
+    border-radius: 8px !important;
+    padding: 0.75rem 1.5rem !important;
+    color: #F5F5F5 !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal2-cancel:hover {
+    background: rgba(82, 53, 123, 1) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Icono de warning personalizado */
+.swal2-warning {
+    border-color: #66C2FF !important;
+    color: #66C2FF !important;
+}
+
+/* Icono de success personalizado */
+.swal2-success {
+    border-color: #7CEBB9 !important;
+}
+
+.swal2-success [class^='swal2-success-line'] {
+    background-color: #7CEBB9 !important;
+}
+
+.swal2-success-ring {
+    border-color: #7CEBB9 !important;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fadeOutUp {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+.animate__animated {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+}
+
+.animate__fadeInDown {
+    animation-name: fadeInDown;
+}
+
+.animate__fadeOutUp {
+    animation-name: fadeOutUp;
+}

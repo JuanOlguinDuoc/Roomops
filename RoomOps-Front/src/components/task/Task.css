@@ -1,0 +1,23 @@
+.task-table {
+  min-width: 1040px;
+}
+
+.task-description-cell {
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.users-create-textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.task-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.task-table tbody tr:hover {
+  background-color: #f7f9fc;
+}
