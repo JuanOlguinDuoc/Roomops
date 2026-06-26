@@ -1,9 +1,9 @@
 # RoomOps
-Gestión de estadías y preparación de apartamentos de hotelería
+Gestión operativa del equipo de trabajo
 
 ## Descripción General
 
-**RoomOps** es una solución integral de gestión hotelera diseñada para optimizar la operación de limpieza, mantenimiento y asignación de habitaciones en establecimientos de hospedaje. La plataforma integra una arquitectura cliente-servidor que centraliza el control administrativo mientras facilita la ejecución de tareas en terreno mediante dispositivos móviles.
+**RoomOps** es una solución integral de gestión operativa diseñada para optimizar la coordinación de limpieza, mantenimiento y asignación de tareas del equipo de trabajo. La plataforma integra una arquitectura cliente-servidor que centraliza el control administrativo mientras facilita la ejecución de tareas en terreno mediante dispositivos móviles.
 
 ---
 
@@ -13,7 +13,7 @@ La capa Backend de **RoomOps** es una API REST robusta construida sobre Spring B
 
 El desarrollo se rige bajo los siguientes pilares de arquitectura:
 
-* **API REST estructurada y documentada:** Expone endpoints HTTP para operaciones CRUD sobre entidades de negocio (apartamentos, tareas, usuarios, roles), con especificación OpenAPI completamente documentada en Swagger UI.
+* **API REST estructurada y documentada:** Expone endpoints HTTP para operaciones CRUD sobre entidades de negocio relacionadas con tareas, usuarios y roles, con especificación OpenAPI completamente documentada en Swagger UI.
 * **Seguridad basada en tokens JWT:** Implementa autenticación mediante JSON Web Tokens y autorización por roles (RBAC), controlando acceso diferenciado a rutas según permisos del usuario.
 * **Persistencia flexible multi-entorno:** Utiliza Spring Data JPA como abstracción de datos, compatible con PostgreSQL en producción y H2 en desarrollo/testing, permitiendo migraciones ágiles entre entornos.
 * **Pruebas automatizadas y cobertura medible:** Incluye test suite completo con JUnit 5, Spring Test y Spring Security Test, con reportes de cobertura generados por JaCoCo para validar calidad del código.

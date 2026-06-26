@@ -1,6 +1,32 @@
 # Roomops
 
-Repositorio monolítico que agrupa el frontend y el backend del proyecto **Roomops**. La solución está orientada a digitalizar la gestión operativa de estadías hoteleras y la preparación de apartamentos, combinando una interfaz de trabajo para operarios y administradores con una capa de servicios para el manejo de la información del sistema.
+Repositorio monolítico que agrupa el frontend y el backend del proyecto **Roomops**. La solución está orientada a digitalizar la gestión operativa del equipo de trabajo, combinando una interfaz de trabajo para operarios y administradores con una capa de servicios para el manejo de la información del sistema.
+
+## Alcance del proyecto
+
+Este repositorio contempla exclusivamente funcionalidades de gestión operativa interna. No incluye ni contempla módulos de gestión de clientes, reservas, pagos, pasarelas de pago, ni flujos comerciales asociados.
+
+### Funcionalidades incluidas
+
+- Gestión de usuarios, autenticación y autorización.
+- Definición de roles y permisos.
+- Gestión de departamentos.
+- Creación y asignación de tareas.
+- Control de estados.
+- Checklist de tareas.
+- Visualización y actualización de tareas.
+- Panel de supervisión.
+- Integración con API REST.
+- Despliegue en cloud.
+
+### Funcionalidades excluidas
+
+- Gestión de clientes.
+- Sistema de reservas.
+- Pagos y pasarelas de pago.
+- Aplicación móvil nativa.
+- Notificaciones push.
+- Integraciones externas con otros PMS.
 
 ## Estructura del repositorio
 
@@ -9,7 +35,7 @@ Repositorio monolítico que agrupa el frontend y el backend del proyecto **Roomo
 
 ## Frontend
 
-La capa frontend está pensada para una experiencia de uso en terreno, con foco en dispositivos móviles y operación rápida sobre tareas hoteleras. Incluye un tablero Kanban dinámico para mover tareas entre estados como Pendiente, En Progreso, Hecho y Bloqueado, además de consumo de API por entorno, retroalimentación visual inmediata y control de sesión ante respuestas no autorizadas.
+La capa frontend está pensada para una experiencia de uso en terreno, con foco en dispositivos móviles y operación rápida sobre tareas operativas. Incluye un tablero Kanban dinámico para mover tareas entre estados como Pendiente, En Progreso, Hecho y Bloqueado, además de consumo de API por entorno, retroalimentación visual inmediata y control de sesión ante respuestas no autorizadas.
 
 ### Tecnologías Frontend
 
@@ -33,7 +59,7 @@ La capa frontend está pensada para una experiencia de uso en terreno, con foco 
 
 ### Descripción del Backend
 
-La capa backend es una API REST construida con Spring Boot que centraliza la lógica de negocio, la persistencia de datos y los servicios de autenticación y autorización de la plataforma. Su propósito es soportar la operación administrativa y la ejecución de tareas en terreno con una arquitectura cliente-servidor clara.
+La capa backend es una API REST construida con Spring Boot que centraliza la lógica de negocio, la persistencia de datos y los servicios de autenticación y autorización de la plataforma. Su propósito es soportar la operación administrativa y la ejecución de tareas del equipo con una arquitectura cliente-servidor clara.
 
 El desarrollo se apoya en estos pilares:
 
